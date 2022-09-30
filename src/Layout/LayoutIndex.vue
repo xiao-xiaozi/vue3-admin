@@ -32,6 +32,7 @@ import AsideMenu from "./AsideMenu.vue";
   </div>
 </template>
 <style lang="scss" scoped>
+@import "@/assets/style/variable.scss";
 $asideMenuWidth: 210px;
 .common-layout {
   height: 100%;
@@ -40,6 +41,7 @@ $asideMenuWidth: 210px;
     .el-aside {
       max-width: $asideMenuWidth;
       border-right: 1px solid #ccc;
+      background-color: $asideMenuBackgroundColor;
       .el-menu {
         border-right: none;
       }
@@ -50,7 +52,7 @@ $asideMenuWidth: 210px;
     padding: 0;
     .head-left {
       width: $asideMenuWidth;
-      background-color: #fcfcfc;
+      background-color: $headLeftBackgroundColor;
       text-align: center;
       .logo {
         margin-top: 5px;
@@ -59,6 +61,7 @@ $asideMenuWidth: 210px;
     .head-menu {
       flex: 1;
       border-bottom: none;
+      background-color: $headMenuBackgroundColor;
     }
   }
 }
