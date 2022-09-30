@@ -52,6 +52,9 @@ $asideMenuWidth: 210px;
       width: $asideMenuWidth;
       background-color: #fcfcfc;
       text-align: center;
+      .logo {
+        margin-top: 5px;
+      }
     }
     .head-menu {
       flex: 1;
