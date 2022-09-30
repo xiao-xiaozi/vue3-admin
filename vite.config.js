@@ -9,13 +9,19 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 export default defineConfig({
   plugins: [
     vue(),
-    // element-plus 按需自动引入组件
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
+        // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+        ElementPlusResolver()
+      ]
     }),
-    // element-plus 按需自动引入组件
     Components({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        // Auto register Element Plus components
+        // 自动导入 Element Plus 组件
+        ElementPlusResolver()
+      ]
     })
   ],
   resolve: {
