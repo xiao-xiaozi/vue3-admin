@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
+    "@iconify-json/ep": "^1.1.9",
+    "@iconify-json/fa": "^1.1.4",
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/test-utils": "^2.0.2",
@@ -32,8 +34,10 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-config-standard-scss": "^6.1.0",
     "unplugin-auto-import": "^0.11.2",
+    "unplugin-icons": "^0.15.2",
     "unplugin-vue-components": "^0.22.7",
     "vite": "^3.0.9",
+    "vite-plugin-inspect": "^0.7.15",
     "vitest": "^0.23.0"
   }
 }

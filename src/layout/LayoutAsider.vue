@@ -1,8 +1,19 @@
-<script setup></script>
+<script setup>
+  const props = defineProps({
+    showAside:{
+      type:Boolean,
+      default:true
+    }
+  })
+</script>
 <template>
-  <div class="layout-asider"></div>
+  <Transition name="aside-slide-in">
+    <div v-show="props.showAside" class="layout-asider"></div>
+  </Transition>
 </template>
 <style lang='scss' scoped>
+@import "./layout";
+
 .layout-asider {
   width: $layout-asider-width;
   height: calc(100vh - $layout-header-height);
