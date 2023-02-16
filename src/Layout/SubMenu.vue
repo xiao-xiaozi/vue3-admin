@@ -1,11 +1,9 @@
 <script setup>
-defineProps({
-  menu: Object
-});
+defineProps({ menu: Object });
 </script>
 <template>
   <el-sub-menu :index="menu.path">
-    <template v-slot:title>{{ menu.title }}</template>
+    <template v-slot:title>{{ menu.title }} </template>
     <template v-for="child in menu.children" :key="child.path">
       <SubMenu v-if="child.children" :menu="child" />
       <el-menu-item :index="child.path" v-else>

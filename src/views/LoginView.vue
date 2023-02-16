@@ -12,12 +12,20 @@ const router = useRouter();
 const loginFormRef = ref(null);
 const formData = reactive({
   username: "admin",
-  password: "admin"
+  password: "admin" 
 });
 
 const rules = reactive({
-  username: [{ required: true, message: "请输入用户名！", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码！", trigger: "blur" }]
+  username: [{
+    required: true,
+    message: "请输入用户名！",
+    trigger: "blur" 
+  }],
+  password: [{
+    required: true,
+    message: "请输入密码！",
+    trigger: "blur" 
+  }] 
 });
 
 function loginClick() {

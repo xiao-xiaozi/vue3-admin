@@ -4,6 +4,7 @@ import { useMenuStore } from "@/stores/menu";
 import { computed } from "vue";
 const menuStore = useMenuStore();
 const menus = computed(() => menuStore.menus);
+
 </script>
 <template>
   <el-menu
@@ -13,7 +14,13 @@ const menus = computed(() => menuStore.menus);
     :router="true">
     <template v-for="menu in menus" :key="menu.path">
       <SubMenu v-if="menu.children" :menu="menu" />
-      <el-menu-item v-else :index="menu.path">{{ menu.title }}</el-menu-item>
+      <el-menu-item v-else :index="menu.path">
+        <!-- <template v-if="menu.meta && menu.meta.icon">
+          <component :is="menu.meta.icon"></component>
+          <IconEpHomeFilled />
+        </template> -->
+        <span>{{ menu.title }}</span>
+      </el-menu-item>
     </template>
   </el-menu>
 </template>

@@ -19,35 +19,20 @@ export default defineConfig({
         // Auto import icon components
         // 自动导入图标组件
         IconsResolver()
-      ],
+      ], 
     }),
     Components({
       resolvers: [
-        // Auto register icon components
-        // 自动注册图标组件 
-        IconsResolver({
-          prefix:'icon',
-          enabledCollections: ['ep']
-        }),
+      // Auto register icon components
+      // 自动注册图标组件 
+        IconsResolver({ prefix: 'icon', enabledCollections: ['ep'] }),
         // element-plus 按需自动引入组件
         ElementPlusResolver()
-      ],
+      ], 
     }),
-    Icons({
-      autoInstall:true
-    }),
+    Icons({ autoInstall: true }),
     Inspect()
   ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "@/assets/style/variable.scss";`,
-      },
-    },
-  },
+  resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), }, },
+  css: { preprocessorOptions: { scss: { additionalData: `@import "@/assets/style/variable.scss";`, }, }, },
 })

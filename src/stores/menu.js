@@ -24,5 +24,19 @@ export const useMenuStore = defineStore("menu", () => {
     activeMenu.value = value;
   }
 
-  return { activeMenu, menus, asideMenu, setCurrentMenu };
+
+  // 控制侧边菜单是否可以展开
+  let asideIsCollapse = ref(false)
+  function changeAsideIsCollapse(){
+    asideIsCollapse.value = !asideIsCollapse.value
+  }
+
+  return { 
+    activeMenu,
+    asideIsCollapse,
+    menus,
+    asideMenu,
+    setCurrentMenu,
+    changeAsideIsCollapse
+  };
 });

@@ -4,11 +4,15 @@ import { useMenuStore } from "../stores/menu";
 import { computed } from "vue";
 const menuStore = useMenuStore();
 const menus = computed(() => menuStore.asideMenu);
+const isCollapse = computed(() => menuStore.asideIsCollapse)
+
+
 </script>
 <template>
   <el-menu
     :default-active="menuStore.activeMenu"
     :router="true"
+    :collapse="isCollapse"
     v-if="menus.length">
     <template v-for="menu in menus" :key="menu.path">
       <SubMenu v-if="menu.children" :menu="menu" />

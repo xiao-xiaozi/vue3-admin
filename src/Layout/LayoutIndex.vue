@@ -11,6 +11,7 @@ function logout(){
   router.push('/login')
 }
 
+
 </script>
 <template>
   <div class="common-layout">
@@ -102,6 +103,7 @@ $aside-menu-background-color: #fff;
 
       .user-name {
         line-height: 60px;
+        user-select: none;
       }
 
       .dropdown-avatar {
