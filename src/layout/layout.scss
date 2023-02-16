@@ -1,0 +1,16 @@
+.aside-slide-in-enter-active {
+    animation: slide-in 0.5s;
+}
+.aside-slide-in-leave-active {
+  animation: slide-in 0.5s reverse;
+}
+@keyframes slide-in {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: $layout-aside-width;
+    }
+}
+
+

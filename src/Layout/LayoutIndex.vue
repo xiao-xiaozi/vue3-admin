@@ -25,43 +25,54 @@ import AsideMenu from "./AsideMenu.vue";
           <el-main>
             <RouterView />
           </el-main>
-          <!-- <el-footer>Footer</el-footer> -->
         </el-container>
       </el-container>
     </el-container>
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/style/variable.scss";
-$asideMenuWidth: 210px;
+@import "@/assets/style/variable";
+
+$aside-menu-width: 210px;
+$head-menu-background-color: #f7f7f7;
+$head-left-background-color: #fcfcfc;
+$aside-menu-background-color: #fff;
+
 .common-layout {
   height: 100%;
+
   .el-container {
     height: 100%;
+
     .el-aside {
-      max-width: $asideMenuWidth;
-      border-right: 1px solid #ccc;
-      background-color: $asideMenuBackgroundColor;
+      max-width: $aside-menu-width;
+      border-right: 1px solid #f1f1f1;
+      background-color: $aside-menu-background-color;
+
       .el-menu {
         border-right: none;
       }
     }
   }
+
   .el-header {
     display: flex;
     padding: 0;
+
     .head-left {
-      width: $asideMenuWidth;
-      background-color: $headLeftBackgroundColor;
+      width: $aside-menu-width;
+      background-color: $head-left-background-color;
       text-align: center;
+
       .logo {
         margin-top: 5px;
       }
     }
+
     .head-menu {
       flex: 1;
       border-bottom: none;
-      background-color: $headMenuBackgroundColor;
+      background-color: $head-menu-background-color;
     }
   }
 }

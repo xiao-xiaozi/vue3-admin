@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { ElMessage } from 'element-plus'
 
 const router = useRouter();
 const loginFormRef = ref(null);
@@ -62,28 +63,34 @@ function loginClick() {
   display: flex;
   height: 100%;
   position: relative;
+
   .login-right {
     width: 500px;
     border-left: 1px solid #f5f5f5;
+
     .login-box {
       width: 80%;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+
       h3 {
         font-weight: 500;
         text-align: center;
         padding: 10px 0;
       }
+
       .login-btn {
         width: 320px;
         margin-left: 80px;
       }
     }
   }
+
   .login-left {
     flex: 1;
+
     h1 {
       text-align: center;
       position: relative;

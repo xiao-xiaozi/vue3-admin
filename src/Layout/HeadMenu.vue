@@ -17,4 +17,4 @@ const menus = computed(() => menuStore.menus);
     </template>
   </el-menu>
 </template>
-<style lang="scss" scoped></style>
+<!-- <style lang="scss" scoped></style> -->

@@ -5,7 +5,8 @@ import { useMenuStore } from "@/stores/menu";
 import App from "./App.vue";
 import router from "./router";
 
-import "./assets/main.css";
+import './assets/main.css'
+import 'normalize.css'
 
 const app = createApp(App);
 
