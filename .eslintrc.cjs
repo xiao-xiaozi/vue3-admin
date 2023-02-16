@@ -10,6 +10,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
+  globals:{
+    ElMessage:'readonly'
+  },
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

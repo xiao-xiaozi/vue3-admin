@@ -8,7 +8,7 @@ const menus = computed(() => menuStore.menus);
 <template>
   <el-menu
     class="head-menu"
-    :default-active="menuStore.currentMenu"
+    :default-active="menuStore.activeMenu"
     mode="horizontal"
     :router="true">
     <template v-for="menu in menus" :key="menu.path">

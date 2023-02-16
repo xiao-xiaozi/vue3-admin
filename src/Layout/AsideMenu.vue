@@ -7,7 +7,7 @@ const menus = computed(() => menuStore.asideMenu);
 </script>
 <template>
   <el-menu
-    :default-active="menuStore.currentMenu"
+    :default-active="menuStore.activeMenu"
     :router="true"
     v-if="menus.length">
     <template v-for="menu in menus" :key="menu.path">

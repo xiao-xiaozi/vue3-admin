@@ -2,6 +2,15 @@
 import { RouterView } from "vue-router";
 import HeadMenu from "@/Layout/HeadMenu.vue";
 import AsideMenu from "./AsideMenu.vue";
+import { useUserStore } from "@/stores/user";
+import router from "@/router";
+
+const userStore = useUserStore()
+
+function logout(){
+  router.push('/login')
+}
+
 </script>
 <template>
   <div class="common-layout">
@@ -16,6 +25,17 @@ import AsideMenu from "./AsideMenu.vue";
             height="50" />
         </div>
         <HeadMenu class="head-menu" />
+        <div class="user-info">
+          <span class="user-name">{{ userStore.userInfo.name }}</span>
+          <el-dropdown class="dropdown-avatar">
+            <el-image :src="userStore.userInfo.avatarUrl" class="user-avatar"></el-image>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
       </el-header>
       <el-container>
         <el-aside>
@@ -73,6 +93,29 @@ $aside-menu-background-color: #fff;
       flex: 1;
       border-bottom: none;
       background-color: $head-menu-background-color;
+    }
+
+    .user-info {
+      width: 100px;
+      background-color: $head-menu-background-color;
+      position: relative;
+
+      .user-name {
+        line-height: 60px;
+      }
+
+      .dropdown-avatar {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .user-avatar {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }

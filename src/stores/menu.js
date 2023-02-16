@@ -3,14 +3,15 @@ import { defineStore } from "pinia";
 import menuData from "@/mock/menu.js";
 
 export const useMenuStore = defineStore("menu", () => {
-  let currentMenu = ref("/index");
+  let activeMenu = ref("/index");
   // 头部菜单
   const menus = reactive(menuData);
   // 侧边菜单,
   const asideMenu = computed(() => {
-    let currentMenuComprise = currentMenu.value.split("/");
+    let currentMenuComprise = activeMenu.value.split("/");
     let topMenuComprise = currentMenuComprise[1];
     let arr = [];
+    // 根据当前选中的头部菜单获取其子菜单作为侧边菜单数据
     for (let item of menus) {
       if (item.path.includes(topMenuComprise)) {
         arr = item.children ? item.children : [];
@@ -20,8 +21,8 @@ export const useMenuStore = defineStore("menu", () => {
     return arr;
   });
   function setCurrentMenu(value) {
-    currentMenu.value = value;
+    activeMenu.value = value;
   }
 
-  return { currentMenu, menus, asideMenu, setCurrentMenu };
+  return { activeMenu, menus, asideMenu, setCurrentMenu };
 });

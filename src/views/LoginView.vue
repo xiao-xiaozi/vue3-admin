@@ -1,13 +1,18 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { ElMessage } from 'element-plus'
+/*
+Problem: 手动引入组件会导致ElMessage组件样式丢失,
+         不导入组件直接使用正常，但eslint会报错：'ElMessage' is not defined.
+         通过在eslint配置global:{ ElMessage:'readonly' }  解决
+*/
+// import { ElMessage } from "element-plus";
 
 const router = useRouter();
 const loginFormRef = ref(null);
 const formData = reactive({
-  username: "",
-  password: ""
+  username: "admin",
+  password: "admin"
 });
 
 const rules = reactive({
@@ -19,7 +24,9 @@ function loginClick() {
   loginFormRef.value.validate((valid) => {
     if (valid) {
       ElMessage.success("登录成功！");
-      router.push("/index");
+      setTimeout(() => {
+        router.push("/index");
+      }, 300)
     }
   });
 }
@@ -67,6 +74,7 @@ function loginClick() {
   .login-right {
     width: 500px;
     border-left: 1px solid #f5f5f5;
+    position: relative;
 
     .login-box {
       width: 80%;
