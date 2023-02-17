@@ -10,6 +10,7 @@ const isCollapse = computed(() => menuStore.asideIsCollapse)
 </script>
 <template>
   <el-menu
+    class="layout-aside-menu"
     :default-active="menuStore.activeMenu"
     :router="true"
     :collapse="isCollapse"
@@ -21,10 +22,16 @@ const isCollapse = computed(() => menuStore.asideIsCollapse)
   </el-menu>
   <div v-else class="not-child-menu">暂无子级菜单!</div>
 </template>
+
 <style lang="scss" scoped>
+.layout-aside-menu {
+  border-right: none;
+}
+
 .not-child-menu {
   color: #333;
   text-align: center;
   margin-top: 20px;
 }
+
 </style>

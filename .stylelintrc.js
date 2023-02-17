@@ -6,7 +6,7 @@ module.exports = {
     ],
     customSyntax: 'postcss-html',
     rules:{
-        'indentation': 2,
+        'indentation': 2
         // 'declaration-property-value-disallowed-list':[]
     }
 }

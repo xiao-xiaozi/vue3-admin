@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 /*
-Problem: 手动引入组件会导致ElMessage组件样式丢失,
+fix: 手动引入组件会导致ElMessage组件样式丢失,
          不导入组件直接使用正常，但eslint会报错：'ElMessage' is not defined.
          通过在eslint配置global:{ ElMessage:'readonly' }  解决
 */

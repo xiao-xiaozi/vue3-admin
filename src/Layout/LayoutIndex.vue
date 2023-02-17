@@ -1,7 +1,8 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
 import HeadMenu from "@/Layout/HeadMenu.vue";
 import AsideMenu from "./AsideMenu.vue";
+import TabsPage from "./TabsPage.vue"
 import { useUserStore } from "@/stores/user";
 import router from "@/router";
 
@@ -10,6 +11,9 @@ const userStore = useUserStore()
 function logout(){
   router.push('/login')
 }
+
+let currentRoute = useRoute()
+
 
 
 </script>
@@ -38,16 +42,23 @@ function logout(){
           </el-dropdown>
         </div>
       </el-header>
-      <el-container>
-        <el-aside>
+      <div class="layout-container">
+        <el-aside class="layout-aside">
           <AsideMenu />
         </el-aside>
-        <el-container>
+        <div class="layout-container-main">
+          <!-- 打开的菜单 -->
+          <TabsPage />
           <el-main>
-            <RouterView />
+            <RouterView v-slot="{ Component }">
+              <KeepAlive>
+                <component :is="Component" v-if = "currentRoute.meta && currentRoute.meta.cache"></component>
+              </KeepAlive>
+              <component :is="Component" v-if="!currentRoute.meta || !currentRoute.meta.cache"></component>
+            </RouterView>
           </el-main>
-        </el-container>
-      </el-container>
+        </div>
+      </div>
     </el-container>
   </div>
 </template>
@@ -62,17 +73,19 @@ $aside-menu-background-color: #fff;
 .common-layout {
   height: 100%;
 
-  .el-container {
-    height: 100%;
+  .layout-container {
+    display: flex;
+    height: calc(100vh - 60px);
 
-    .el-aside {
-      max-width: $aside-menu-width;
+    .layout-aside {
+      width: $aside-menu-width;
       border-right: 1px solid #f1f1f1;
       background-color: $aside-menu-background-color;
+    }
 
-      .el-menu {
-        border-right: none;
-      }
+    .layout-container-main {
+      height: 100%;
+      width: 100%;
     }
   }
 

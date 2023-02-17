@@ -13,12 +13,12 @@ export default [
     title: "测试菜单3",
     children: [
       {
-        path: "/test-three/child-1",
-        title: "测试菜单3-1" 
+        path: "/test-three/closePageCache",
+        title: "页面不开缓存" 
       },
       {
-        path: "/test-three/child-2",
-        title: "测试菜单3-2" 
+        path: "/test-three/pageCache",
+        title: "开启页面缓存" 
       },
       {
         path: "/test-three/child-3",

@@ -15,9 +15,12 @@ const menus = computed(() => menuStore.menus);
     <template v-for="menu in menus" :key="menu.path">
       <SubMenu v-if="menu.children" :menu="menu" />
       <el-menu-item v-else :index="menu.path">
+        <!-- todo: icon按需加载，动态挂载菜单的icon无法显示 -->
         <!-- <template v-if="menu.meta && menu.meta.icon">
-          <component :is="menu.meta.icon"></component>
-          <IconEpHomeFilled />
+          <el-icon>
+            <component :is="menu.meta.icon"></component>
+            <IconEpHomeFilled />
+          </el-icon>
         </template> -->
         <span>{{ menu.title }}</span>
       </el-menu-item>
