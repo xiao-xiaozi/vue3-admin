@@ -6,7 +6,8 @@ module.exports = {
     ],
     customSyntax: 'postcss-html',
     rules:{
-        'indentation': 2
+        'indentation': 2,
+        "selector-class-pattern":"[a-z]+[-_]?"
         // 'declaration-property-value-disallowed-list':[]
     }
 }
