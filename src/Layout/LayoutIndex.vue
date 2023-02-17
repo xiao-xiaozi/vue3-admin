@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView, useRoute } from "vue-router";
+import { RouterView } from "vue-router";
 import HeadMenu from "@/Layout/HeadMenu.vue";
 import AsideMenu from "./AsideMenu.vue";
 import TabsPage from "./TabsPage.vue"
@@ -12,7 +12,6 @@ function logout(){
   router.push('/login')
 }
 
-let currentRoute = useRoute()
 
 
 
@@ -49,12 +48,12 @@ let currentRoute = useRoute()
         <div class="layout-container-main">
           <!-- 打开的菜单 -->
           <TabsPage />
-          <el-main>
-            <RouterView v-slot="{ Component }">
+          <el-main class="layout-el-main">
+            <RouterView v-slot="{ Component,route }">
               <KeepAlive>
-                <component :is="Component" v-if = "currentRoute.meta && currentRoute.meta.cache"></component>
+                <component :is="Component" v-if = "route.meta && route.meta.cache"></component>
               </KeepAlive>
-              <component :is="Component" v-if="!currentRoute.meta || !currentRoute.meta.cache"></component>
+              <component :is="Component" v-if="!route.meta || !route.meta.cache"></component>
             </RouterView>
           </el-main>
         </div>
@@ -86,6 +85,10 @@ $aside-menu-background-color: #fff;
     .layout-container-main {
       height: 100%;
       width: 100%;
+
+      .layout-el-main {
+        height: calc(100% - 41px);
+      }
     }
   }
 
@@ -134,4 +137,5 @@ $aside-menu-background-color: #fff;
     }
   }
 }
+
 </style>

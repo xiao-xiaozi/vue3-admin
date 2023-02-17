@@ -7,7 +7,9 @@ export const usePageStore = defineStore('page', () => {
   // 当前显示页面的route.name
   const currentPageName = ref('HomeView')
   // 当前打开的页面数组 []:route
-  const opened = reactive([])
+  const opened = reactive([
+    { name: 'HomeView', meta: { title: '首页' }}
+  ])
   function openPage(openRoute){
     // 更新当前打开的页面名
     updateCurrentPageName(openRoute.name)
