@@ -66,6 +66,18 @@ function tabRemove(tabPaneName) {
     & :deep(.el-tabs__content) {
       padding: 0;
     }
+
+    & :deep(.el-tabs__nav) {
+      .el-tabs__item:first-child {
+        &:hover {
+          padding: 0 20px;
+        }
+
+        .is-icon-close {
+          width: 0;
+        }
+      }
+    }
   }
 }
 </style>
