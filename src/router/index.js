@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useMenuStore } from "@/stores/menu";
 import { usePageStore } from "@/stores/page";
-
+import { api } from "@/api"
+import menuComponentMap from "./menuComponentMap";
+import { cloneDeep } from "lodash"
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -20,12 +22,19 @@ const router = createRouter({
           name: "HomeView",
           component: () => import("../views/HomeView.vue"),
           meta: { title: '首页' }
-        },
+        }
+      ]
+    },
+    {
+      path: "/test-two",
+      component: Layout,
+      meta: { title: 'TestTwo' },
+      children: [
+        // 参考：https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
         {
-          path: "test-two",
-          name: "TestTwo",
-          component: () => import("@/views/TestTwo.vue"),
-          meta: { title: 'TestTwo' }
+          path: '',
+          name: 'TestTwo',
+          component: () => import("@/views/TestTwo.vue")
         }
       ]
     },
@@ -34,6 +43,7 @@ const router = createRouter({
       name: "TestThree",
       redirect: "/test-three/closePageCache",
       component: Layout,
+      meta: { title: '测试菜单3' },
       children: [
         {
           path: "closePageCache",
@@ -79,11 +89,51 @@ const router = createRouter({
   ] 
 });
 
+function handleMenus(menus){
+  menus.forEach(menu => {
+    menu.title = (menu.meta && menu.meta.title) || '未命名菜单'
+    // if(Reflect.has(menus, 'children') && Array.isArray(menu.children) && menu.children.length > 1) {
+    //   handleMenus(menu.children)
+    // }
+    if(Reflect.has(menu,'children') && Array.isArray(menu.children)) {
+      // if(menu.children.length <= 1) {
+      //   Reflect.deleteProperty(menu, 'children')
+      // }else {
+      //   handleMenus(menu.children)
+      // }
+      handleMenus(menu.children)
+    }
+  })
+}
+
+function handlePermissionRoutes(routes) {
+  routes.forEach(route => {
+    route.component = menuComponentMap[route.component]
+    if(Reflect.has(route, 'children') && Array.isArray(route.children)) {
+      handlePermissionRoutes(route.children)
+    }
+  })
+}
+
+
+
 // 全局前置守卫
-router.beforeEach((to, from, next) => {
-  // 设置当前打开的菜单
-  let menuStore = useMenuStore();
-  menuStore.setCurrentMenu(to.path);
+router.beforeEach(async (to, from, next) => {
+  try {
+    let menuStore = useMenuStore();
+    let { data: { permissionRoute }} = await api.userResourceGet()
+    let menus = cloneDeep(permissionRoute)
+    handleMenus(menus)
+    menuStore.setMenus(menus)
+    // 处理动态路由并挂载
+    handlePermissionRoutes(permissionRoute)
+    router.addRoute(permissionRoute)
+    console.log(permissionRoute)
+    // 设置当前打开的菜单
+    menuStore.setCurrentMenu(to.path);
+  }catch(error){
+    console.log(error)
+  }
   next();
 });
 

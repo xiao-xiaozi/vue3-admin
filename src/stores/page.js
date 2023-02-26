@@ -1,3 +1,4 @@
+import router from "@/router/index";
 import { defineStore } from "pinia";
 import { reactive, ref } from 'vue'
 
@@ -40,7 +41,9 @@ export const usePageStore = defineStore('page', () => {
     // 判断关闭页面是否为当前显示页面，是则需要打开一个新页面
     if(closeRoute.name === currentPageName.value) {
       // 默认取关闭页面的前一个页面进行展示
-      updateCurrentPageName(opened[closeIndex - 1].name)
+      // updateCurrentPageName(opened[closeIndex - 1].name)
+      // fix: 通过路由跳转，而不是手动更新当前标签页
+      router.push({ name: opened[closeIndex - 1].name })
     }
     opened.splice(closeIndex, 1)
   }

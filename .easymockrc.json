@@ -1,0 +1,11 @@
+{
+    "host":"https://mock.mengxuegu.com/",
+    "output": "./src/api",
+    "template": "axios",
+    "projects": [
+        {
+            "id": "63f0301fc5a76a117cab102f",
+            "name": "api"
+        }
+    ]
+}
