@@ -25,59 +25,59 @@ const router = createRouter({
         }
       ]
     },
-    {
-      path: "/test-two",
-      component: Layout,
-      meta: { title: 'TestTwo' },
-      children: [
-        // 参考：https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
-        {
-          path: '',
-          name: 'TestTwo',
-          component: () => import("@/views/TestTwo.vue")
-        }
-      ]
-    },
-    {
-      path: "/test-three",
-      name: "TestThree",
-      redirect: "/test-three/closePageCache",
-      component: Layout,
-      meta: { title: '测试菜单3' },
-      children: [
-        {
-          path: "closePageCache",
-          name: "ClosePageCache",
-          component: () => import("@/views/testThree/ClosePageCache.vue"),
-          meta: {
-            cache: false, 
-            title: '页面不开启缓存' 
-          }
-        },
-        {
-          path: "pageCache",
-          name: "PageCache",
-          component: () => import("@/views/testThree/PageCache.vue"),
-          meta: {
-            cache: true, 
-            title: '开启页面缓存' 
-          }
-        },
-        {
-          path: "child-3",
-          name: "ChildThree",
-          redirect: "/test-three/child-3/CT-one",
-          children: [
-            {
-              path: "CT-one",
-              name: "CTOne",
-              component: () => import("@/views/testThree/ChildThree/CTone.vue")
-              ,meta: { title: '测试菜单3-3-1' }
-            }
-          ]
-        }
-      ]
-    },
+    // {
+    //   path: "/test-two",
+    //   component: Layout,
+    //   meta: { title: 'TestTwo' },
+    //   children: [
+    //     // 参考：https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
+    //     {
+    //       path: '',
+    //       name: 'TestTwo',
+    //       component: () => import("@/views/TestTwo.vue")
+    //     }
+    //   ]
+    // },
+    // {
+    //   path: "/test-three",
+    //   name: "TestThree",
+    //   redirect: "/test-three/closePageCache",
+    //   component: Layout,
+    //   meta: { title: '测试菜单3' },
+    //   children: [
+    //     {
+    //       path: "closePageCache",
+    //       name: "ClosePageCache",
+    //       component: () => import("@/views/testThree/ClosePageCache.vue"),
+    //       meta: {
+    //         cache: false, 
+    //         title: '页面不开启缓存' 
+    //       }
+    //     },
+    //     {
+    //       path: "pageCache",
+    //       name: "PageCache",
+    //       component: () => import("@/views/testThree/PageCache.vue"),
+    //       meta: {
+    //         cache: true, 
+    //         title: '开启页面缓存' 
+    //       }
+    //     },
+    //     {
+    //       path: "child-3",
+    //       name: "ChildThree",
+    //       redirect: "/test-three/child-3/CT-one",
+    //       children: [
+    //         {
+    //           path: "CT-one",
+    //           name: "CTOne",
+    //           component: () => import("@/views/testThree/ChildThree/CTone.vue")
+    //           ,meta: { title: '测试菜单3-3-1' }
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     {
       path: "/login",
       name: "LoginView",
@@ -128,7 +128,6 @@ router.beforeEach(async (to, from, next) => {
     // 处理动态路由并挂载
     handlePermissionRoutes(permissionRoute)
     router.addRoute(permissionRoute)
-    console.log(permissionRoute)
     // 设置当前打开的菜单
     menuStore.setCurrentMenu(to.path);
   }catch(error){

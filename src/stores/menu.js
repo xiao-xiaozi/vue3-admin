@@ -41,7 +41,6 @@ export const useMenuStore = defineStore("menu", () => {
   // 设置菜单
   function setMenus(menusArr){
     menus.value = fixMenus.concat(menusArr)
-    console.log(menus.value)
   }
 
 
