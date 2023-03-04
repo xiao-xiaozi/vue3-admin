@@ -1,8 +1,8 @@
 // 菜单路由的组件
 export default {
   "Layout": () => import('@/Layout/LayoutIndex.vue'),
-  "testTwo": () => import('@/views/TestTwo.vue'),
-  "pageCache": () => import('@/views/testThree/PageCache.vue'),
-  "closePageCache": () => import('@/views/testThree/ClosePageCache.vue'),
-  "CTone": () => import('@/views/testThree/ChildThree/CTone.vue')
+  "testMenuSecond": () => import('@/views/TestMenuSecond.vue'),
+  "pageCache": () => import('@/views/TestMenuThird/PageCache.vue'),
+  "closePageCache": () => import('@/views/TestMenuThird/ClosePageCache.vue'),
+  "threeLayerView": () => import('@/views/TestMenuThird/TestMenuThirdChild/ThreeLayerView.vue')
 }

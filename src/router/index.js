@@ -4,6 +4,7 @@ import { usePageStore } from "@/stores/page";
 import { api } from "@/api"
 import menuComponentMap from "./menuComponentMap";
 import { cloneDeep } from "lodash"
+import { useUserStore } from "@/stores/user";
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -85,6 +86,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/LoginView.vue")
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFountView',
+      component: () => import('@/views/NotFoundView.vue')
     }
   ] 
 });
@@ -118,22 +124,33 @@ function handlePermissionRoutes(routes) {
 
 
 // 全局前置守卫
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to) => {
   try {
     let menuStore = useMenuStore();
-    let { data: { permissionRoute }} = await api.userResourceGet()
-    let menus = cloneDeep(permissionRoute)
-    handleMenus(menus)
-    menuStore.setMenus(menus)
-    // 处理动态路由并挂载
-    handlePermissionRoutes(permissionRoute)
-    router.addRoute(permissionRoute)
+    let userStore = useUserStore();
     // 设置当前打开的菜单
     menuStore.setCurrentMenu(to.path);
+    if(userStore.hasPermissionInfo) {
+      return true
+    }else {
+      let { data: { permissionRoutes }} = await api.userResourceGet()
+      let menus = cloneDeep(permissionRoutes)
+      handleMenus(menus)
+      menuStore.setMenus(menus)
+      // 处理动态路由并挂载
+      handlePermissionRoutes(permissionRoutes)
+      // router.addRoute(permissionRoute)
+      // fix: 修复路由挂载错误
+      permissionRoutes.forEach(route => {
+        router.addRoute(route)
+      })
+      userStore.setHasPermissionInfo(true)
+      return to.fullPath
+    }
   }catch(error){
     console.log(error)
   }
-  next();
+  // next();
 });
 
 // 全局后置钩子
