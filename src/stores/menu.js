@@ -19,6 +19,7 @@ export const useMenuStore = defineStore("menu", () => {
     title: "首页",
     meta: { icon: 'HomeFilled' }
   }]);
+  
   // 侧边菜单,
   const asideMenu = computed(() => {
     let currentMenuComprise = activeMenu.value.split("/");
@@ -33,6 +34,7 @@ export const useMenuStore = defineStore("menu", () => {
     }
     return arr;
   });
+
   // 设置当前激活的菜单
   function setCurrentMenu(value) {
     activeMenu.value = value;

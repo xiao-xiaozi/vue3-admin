@@ -5,11 +5,21 @@ import AsideMenu from "./AsideMenu.vue";
 import TabsPage from "./TabsPage.vue"
 import { useUserStore } from "@/stores/user";
 import router from "@/router";
+import util from "@/utils";
 
 const userStore = useUserStore()
 
 function logout(){
-  router.push('/login')
+  ElMessageBox.confirm('确定注销登录吗？', '提示', { type: 'warning', }).then(() => {
+    userStore.resetAllState()
+    util.cookie.remove('token')
+    router.push('/login')
+    ElMessage.success('退出登录！')
+    // setTimeout(() => {
+    // }, 500)
+  }).catch(() => {
+    ElMessage.info('取消！')
+  })
 }
 
 

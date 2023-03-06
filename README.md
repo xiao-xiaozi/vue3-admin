@@ -55,6 +55,9 @@ npm run lint
   - [ ] 处理可在标签页打开的菜单,预期在route.mete中新增inTab属性
 - [ ] 打开的标签页做持久化，否则刷新时会丢失
 
+# wait for reslove
+- [ ] 自动引入elementPlus组件时，配置默认语言为中文
+
 
 
 # 介绍

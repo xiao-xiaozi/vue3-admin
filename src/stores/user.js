@@ -14,9 +14,15 @@ export const useUserStore = defineStore('user', () => {
     hasPermissionInfo.value = val
   }
 
+  // 重置所有state属性
+  function resetAllState(){
+    hasPermissionInfo.value = false
+  }
+
   return {
     userInfo,
     hasPermissionInfo,
-    setHasPermissionInfo
+    setHasPermissionInfo,
+    resetAllState
   }
 })

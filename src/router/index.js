@@ -5,6 +5,7 @@ import { api } from "@/api"
 import menuComponentMap from "./menuComponentMap";
 import { cloneDeep } from "lodash"
 import { useUserStore } from "@/stores/user";
+import util from "@/utils";
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -98,15 +99,7 @@ const router = createRouter({
 function handleMenus(menus){
   menus.forEach(menu => {
     menu.title = (menu.meta && menu.meta.title) || '未命名菜单'
-    // if(Reflect.has(menus, 'children') && Array.isArray(menu.children) && menu.children.length > 1) {
-    //   handleMenus(menu.children)
-    // }
     if(Reflect.has(menu,'children') && Array.isArray(menu.children)) {
-      // if(menu.children.length <= 1) {
-      //   Reflect.deleteProperty(menu, 'children')
-      // }else {
-      //   handleMenus(menu.children)
-      // }
       handleMenus(menu.children)
     }
   })
@@ -128,29 +121,44 @@ router.beforeEach(async (to) => {
   try {
     let menuStore = useMenuStore();
     let userStore = useUserStore();
-    // 设置当前打开的菜单
-    menuStore.setCurrentMenu(to.path);
-    if(userStore.hasPermissionInfo) {
-      return true
+    let token = util.cookie.get('token')
+
+    // 判断是否已登录
+    if(token) {
+      // 判断是否已获取权限信息(菜单，用户信息等)
+      if(userStore.hasPermissionInfo) {
+        if(to.path === 'LoginView') {
+          return { name: 'HomeView' }
+        }else {
+          // 设置当前打开的菜单
+          menuStore.setCurrentMenu(to.path);
+          return true
+        }
+      }else {
+        let { data: { permissionRoutes }} = await api.userResourceGet()
+        let menus = cloneDeep(permissionRoutes)
+        handleMenus(menus)
+        menuStore.setMenus(menus)
+        // 处理动态路由并挂载
+        handlePermissionRoutes(permissionRoutes)
+        permissionRoutes.forEach(route => {
+          router.addRoute(route)
+        })
+        userStore.setHasPermissionInfo(true)
+        if(to.name === 'LoginView') {
+          return { name: 'HomeView' }
+        }else {
+          return to.fullPath
+        }
+      }
     }else {
-      let { data: { permissionRoutes }} = await api.userResourceGet()
-      let menus = cloneDeep(permissionRoutes)
-      handleMenus(menus)
-      menuStore.setMenus(menus)
-      // 处理动态路由并挂载
-      handlePermissionRoutes(permissionRoutes)
-      // router.addRoute(permissionRoute)
-      // fix: 修复路由挂载错误
-      permissionRoutes.forEach(route => {
-        router.addRoute(route)
-      })
-      userStore.setHasPermissionInfo(true)
-      return to.fullPath
+      if(to.name !== 'LoginView') {
+        return { name: 'LoginView' }
+      }
     }
   }catch(error){
     console.log(error)
   }
-  // next();
 });
 
 // 全局后置钩子

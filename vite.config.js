@@ -8,6 +8,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from "unplugin-icons/vite"
 import Inspect from "vite-plugin-inspect"
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -35,4 +36,5 @@ export default defineConfig({
   ],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), }, },
   css: { preprocessorOptions: { scss: { additionalData: `@import "@/assets/style/variable.scss";`, }, }, },
+  define: { "APP_VERSION": JSON.stringify(process.env.npm_package_version) }
 })

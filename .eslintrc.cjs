@@ -8,7 +8,12 @@ module.exports = {
     'eslint:recommended',
   ],
   parserOptions: { ecmaVersion: 'latest', },
-  globals: { ElMessage: 'readonly' },
+  globals: {
+    ElMessage: 'readonly',
+    ElMessageBox: 'readonly',
+    process: 'readonly',
+    APP_VERSION: 'readonly' 
+  },
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
