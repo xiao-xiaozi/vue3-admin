@@ -47,7 +47,7 @@ function tabRemove(tabPaneName) {
       class="opened-page-tab">
       <el-tab-pane 
         v-for="page in openedPage"
-        :key="page.name"
+        :key="page.path"
         :name="page.name"
         :label="tabName(page)"></el-tab-pane>
     </el-tabs>

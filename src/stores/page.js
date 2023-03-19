@@ -27,7 +27,11 @@ export const usePageStore = defineStore('page', () => {
   // 打开新页面
   function addOpened(route){
     // Error: Avoid app logic that relies on enumerating keys on a component instance. The keys will be empty in production mode to avoid performance overhead.
-    opened.push(route)
+    // opened.push(route)
+    // inTab属性为true时，才将路由放入标签页中
+    if(Reflect.has(route.meta,'inTab') && route.meta.inTab) {
+      opened.push(route)
+    }
   }
   // 更新打开页面的路由参数
   function updateOpenedRoute(newRoute){
