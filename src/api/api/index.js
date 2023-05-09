@@ -1,7 +1,16 @@
 import instance from './instance';
 import { convertRESTAPI } from '../util';
 
-/** 获取菜单信息以及登录用户西悉尼 */
+/** 登录接口 */
+function login_post(opts) {
+  return instance({
+    method: 'post',
+    url:  '/login',
+    opts: opts
+  });
+}
+
+/** 获取菜单信息以及登录用户信息 */
 function userResource_get(opts) {
   return instance({
     method: 'get',
@@ -65,6 +74,7 @@ function query_get(opts) {
 }
 
 export {
+  login_post,
   userResource_get,
   restful_id_list_get,
   proxy_get,
