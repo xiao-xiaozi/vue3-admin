@@ -5,12 +5,12 @@ import packageJson from "../../package.json"
 import { useUserStore } from "@/stores/user";
 
 const { name, version } = packageJson
-const adapter = new LocalStorage(`${name}-${version}`)
+// const adapter = new LocalStorage(`${name}-${version}`)
 // const db = new Low(adapter)
-const db = new LowSync(adapter)
+const db = new LowSync(new LocalStorage(`${name}-${version}`))
 // db.data = { sys: {}, database: {}}
-db.data = JSON.parse(localStorage.getItem(`${name}-${version}`))
-db.data ||= { sys: {}, database: {}}   
+// db.data = JSON.parse(localStorage.getItem(`${name}-${version}`))
+db.data ||= db.adapter.read()  
 
 
 /**
@@ -39,7 +39,6 @@ export async function pathInit({
   const value = db.data[currentPath]
   // db无值或validator返回false 时，初始化/重置db
   if(!(value !== undefined && validator(value))) {
-    debugger
     // db.set(currentPath, defaultValue).write()
     db.data[currentPath] = defaultValue
     db.write()
