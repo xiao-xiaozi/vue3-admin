@@ -1,0 +1,26 @@
+# This workflow will build a Vue3 project and deploy it to GitHub Pages on push to the master branch
+
+name: Vue3 Build and Deploy
+
+on:
+  push:
+    branches:
+      - master # set which branch to build and deploy from
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          custom_domain: '' # set your custom domain here (optional)
