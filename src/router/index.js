@@ -96,6 +96,10 @@ const router = createRouter({
   ] 
 });
 
+/**
+ * 将路由数据转为菜单数据所需结构 （优化可能性：菜单的title值不从menu.title获取，改为从mene.meta.title取，则无需处理路由数据新增menu.title属性）
+ * @param {*} menus 
+ */
 function handleMenus(menus){
   menus.forEach(menu => {
     menu.title = (menu.meta && menu.meta.title) || '未命名菜单'
@@ -121,11 +125,13 @@ router.beforeEach(async (to) => {
   try {
     let menuStore = useMenuStore();
     let userStore = useUserStore();
+    let pageStore = usePageStore()
     let token = util.cookie.get('token')
 
     // 判断是否已登录
     if(token) {
       // 判断是否已获取权限信息(菜单，用户信息等)
+      // hasPermissionInfo 通过是否已获取权限信息字段来判断
       if(userStore.hasPermissionInfo) {
         if(to.path === 'LoginView') {
           return { name: 'HomeView' }
@@ -135,7 +141,7 @@ router.beforeEach(async (to) => {
           return true
         }
       }else {
-        let { data: { permissionRoutes }} = await api.userResourceGet()
+        let { data: { permissionRoutes, userInfo }} = await api.userResourceGet()
         let menus = cloneDeep(permissionRoutes)
         handleMenus(menus)
         menuStore.setMenus(menus)
@@ -145,6 +151,14 @@ router.beforeEach(async (to) => {
           router.addRoute(route)
         })
         userStore.setHasPermissionInfo(true)
+        // 更新用户信息
+        if(userInfo) {
+          userStore.setUserInfo(userInfo)
+        }
+        // 收集标签页菜单数据
+        pageStore.findAllInTabPage(permissionRoutes)
+        // 从持久化数据中加载已打开的标签页信息
+        pageStore.openedLoad()
         if(to.name === 'LoginView') {
           return { name: 'HomeView' }
         }else {
@@ -162,8 +176,7 @@ router.beforeEach(async (to) => {
 });
 
 // 全局后置钩子
-// eslint-disable-next-line no-unused-vars
-router.afterEach((to, from) => {
+router.afterEach((to) => {
   // 将打开的页面加入到已打开页面进行维护
   let pageStore = usePageStore()
   pageStore.openPage(to)

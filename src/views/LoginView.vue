@@ -30,6 +30,7 @@ const rules = reactive({
   }] 
 });
 
+
 function loginClick() {
   loginFormRef.value.validate((valid) => {
     if (valid) {
@@ -47,7 +48,7 @@ function loginClick() {
 <template>
   <div class="login-view">
     <div class="login-left">
-      <h1>This is an Login page</h1>
+      <h1>Login page</h1>
     </div>
     <div class="login-right">
       <div class="login-box">

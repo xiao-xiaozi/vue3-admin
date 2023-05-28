@@ -1,6 +1,5 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
-// import menuData from "@/mock/menu.js";
 
 export const useMenuStore = defineStore("menu", () => {
   // 标记是否已拉取异步菜单，登录信息等数据
