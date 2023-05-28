@@ -10,7 +10,7 @@ const { name, version } = packageJson
 const db = new LowSync(new LocalStorage(`${name}-${version}`))
 // db.data = { sys: {}, database: {}}
 // db.data = JSON.parse(localStorage.getItem(`${name}-${version}`))
-db.data ||= db.adapter.read()  
+db.data ||= cloneDeep(db.adapter.read())  
 
 
 /**
