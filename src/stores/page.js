@@ -46,7 +46,8 @@ export const usePageStore = defineStore('page', () => {
     if(Reflect.has(route.meta,'hidden') && route.meta.hidden) {
       return
     }else {
-      opened.push(route)
+      // opened.push(route)
+      opened.push(tabPages.find(page => page.name === router.meta.title))
       // 更新持久化中的opened数据
       opened2db()
     }
