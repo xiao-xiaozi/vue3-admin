@@ -5,12 +5,11 @@ import packageJson from "../../package.json"
 import { useUserStore } from "@/stores/user";
 
 const { name, version } = packageJson
-// const adapter = new LocalStorage(`${name}-${version}`)
+const adapter = new LocalStorage(`${name}-${version}`)
 // const db = new Low(adapter)
-const db = new LowSync(new LocalStorage(`${name}-${version}`))
-// db.data = { sys: {}, database: {}}
-// db.data = JSON.parse(localStorage.getItem(`${name}-${version}`))
-db.data ||= cloneDeep(db.adapter.read())  
+const db = new LowSync(adapter)
+db.read()
+db.data ||= { sys: {}, database: {}}   
 
 
 /**
