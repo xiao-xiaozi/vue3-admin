@@ -55,6 +55,7 @@ npm run lint
   - [X] 处理可在标签页打开的菜单,预期在route.mete中新增inTab属性
 - [ ] 打开的标签页做持久化，否则刷新时会丢失
 - [ ] 自动引入elementPlus组件时，配置默认语言为中文
+- [ ] 部署Github Page后，lowdb.write方式报错`TypeError: Converting circular structure to JSON`
 
 
 
