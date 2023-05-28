@@ -18,6 +18,10 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/max-attributes-per-line': ['warn', { singleline: 3, multiline: 1, }],
+    'vue/first-attribute-linebreak': ['warn', {
+      "singleline": 'ignore',
+      "multiline": "below"
+    }],
     'vue/singleline-html-element-content-newline': 'off',
     'vue/html-indent': ['error', 2, {
       attribute: 1,
