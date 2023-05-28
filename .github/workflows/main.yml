@@ -4,8 +4,8 @@ name: Vue3 Build and Deploy
 
 on:
   push:
-    branches:
-      - master # set which branch to build and deploy from
+    branches: ["main"]
+      # - master # set which branch to build and deploy from
 
 jobs:
   build-and-deploy:
