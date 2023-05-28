@@ -47,7 +47,12 @@ export const usePageStore = defineStore('page', () => {
       return
     }else {
       // opened.push(route)
-      opened.push(tabPages.find(page => page.name === router.meta.title))
+      opened.push({
+        name: route.name, 
+        path: route.path,
+        fullPath: route.fullPath,
+        meta: route.meta 
+      })
       // 更新持久化中的opened数据
       opened2db()
     }
