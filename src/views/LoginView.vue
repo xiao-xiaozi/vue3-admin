@@ -43,7 +43,12 @@ function loginClick() {
       }, 300)
     }
   });
+
 }
+
+console.log(import.meta.env.PROD)
+
+
 </script>
 <template>
   <div class="login-view">
