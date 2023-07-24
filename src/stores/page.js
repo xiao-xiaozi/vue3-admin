@@ -103,11 +103,13 @@ export const usePageStore = defineStore('page', () => {
    */
   function findKeepAliveRoute(routes) {
     if (Array.isArray(routes)) {
-      if (Reflect.has(routes, 'children') && Array.isArray(routes.children) && routes.children.length) {
-        findKeepAliveRoute(routes.children)
-      } else {
-        if (Reflect.has(routes, 'meta') && routes.meta) keepAliveRouteName.add(routes.name)
-      }
+      routes.forEach(route => {
+        if(Reflect.has(route, 'children')) {
+          if(Array.isArray(route.children) && route.children.length) findKeepAliveRoute(route.children)
+        }else {
+          if(Reflect.has(route,'meta') && route.meta.cache) keepAliveRouteName.add(route.name)
+        }
+      })
     } else {
       throw new Error('routes must be Array!')
     }
@@ -117,12 +119,6 @@ export const usePageStore = defineStore('page', () => {
   // 将已打开的页面进行持久化，解决刷新丢失已打开页面问题
   let openedLoaded = ref(false) // 标记是否已加载持久化中的页面数据
   const lowdbStore = useLowdbStore()
-  // function isLoaded(){
-  //   if(openedLoaded.value) return Promise.resolve()
-  //   return new Promise(resolve => {
-
-  //   })
-  // }
   /**
    * 从持久化数据中加载打开的标签页数据
    */
