@@ -68,6 +68,8 @@ export const usePageStore = defineStore('page', () => {
     // 更新持久化中的opened数据
     opened2db()
   }
+
+  
   /**
    * 关闭打开的页面
    * @param {*} closeRoute 
@@ -85,6 +87,8 @@ export const usePageStore = defineStore('page', () => {
     // 更新持久化中的opened数据
     opened2db()
   }
+
+
   /**
    * 更新当前显示页面的route.name
    * 切换当前打开的标签页
@@ -94,7 +98,6 @@ export const usePageStore = defineStore('page', () => {
     currentPageName.value = newPageName
   }
 
-  // 路由缓存 Todo: 根据route配置生成需要缓存的页面name数组，与keepAlive搭配使用
   // 开启缓存的页面, 关闭页面时，页面若开启了缓存，则从keepAliceRouteName中移除，销毁该组件。
   const keepAliveRouteName = reactive(new Set())
   /**
@@ -114,6 +117,7 @@ export const usePageStore = defineStore('page', () => {
       throw new Error('routes must be Array!')
     }
   }
+
 
 
   // 将已打开的页面进行持久化，解决刷新丢失已打开页面问题
@@ -193,6 +197,85 @@ export const usePageStore = defineStore('page', () => {
     pushFn(routes)
   }
 
+
+  /**
+   * 关闭左侧页面
+   * @param {*} param0 
+   */
+  function closeLeftPage({ pageSelect } = {}){
+    let clickPage = ref(pageSelect || currentPageName)
+    let currentIndex = 0
+    opened.forEach((page, index) => {
+      if(page.name === clickPage.value) currentIndex = index 
+    })
+    if(currentIndex > 0) {
+      // 关闭打开的页面，并在缓存设置中删除
+      for(let i = opened.length - 1; i >= 0; i--) {
+        if (opened[i].name === 'HomeView' || i >= currentIndex) continue
+        opened.splice(i, 1)
+      }
+    }
+    // 更新持久化数据
+    opened2db()
+    // 导航到右键点击的页面
+    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+  }
+
+  /**
+   * 关闭右侧页面
+   * @param {*} param0 
+   */
+  function closeRightPage({ pageSelect } = {}){
+    let clickPage = ref(pageSelect || currentPageName)
+    let currentIndex = 0;
+    opened.forEach((page, index) => {
+      if(page.name === clickPage.value) currentIndex = index
+    })
+    if(currentIndex > 0) {
+      for(let i = opened.length - 1; i >=0; i--) {
+        if(opened[i].name === 'HomeView' || currentIndex >= i) continue
+        opened.splice(i, 1)
+      }
+    }
+    // 更新持久化数据
+    opened2db();
+    // 导航到右键点击的页面
+    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+  }
+
+  /**
+   * 关闭其它页面
+   * @param {*} param0 
+   */
+  function closeOtherPage({ pageSelect } = {}){
+    let clickPage = ref(pageSelect || currentPageName)
+    let index = opened.findIndex(page => page.name === clickPage.value)
+    if(index >= 0) {
+      for(let i = opened.length - 1; i >=0; i--) {
+        if(opened[i].name === 'HomeView' || i === index) continue
+        opened.splice(i,1)
+      }
+    }
+    // 更新持久化数据
+    opened2db();
+    // 导航到右键点击的页面
+    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+  }
+
+  /**
+   * 关闭所有打开页面
+   */
+  function closeAllPage(){
+    for(let i = opened.length - 1; i >=0; i--) {
+      if(opened[i] === 'HomeView') continue
+      opened.splice(i,1)
+    }
+    // 更新持久化数据
+    opened2db();
+    // 导航到首页
+    router.push({ name: 'HomeView' })
+  }
+
   return {
     opened,
     keepAliveRouteName,
@@ -203,7 +286,11 @@ export const usePageStore = defineStore('page', () => {
     findKeepAliveRoute,
     updateCurrentPageName,
     findAllInTabPage,
-    openedLoad
+    openedLoad,
+    closeLeftPage,
+    closeRightPage,
+    closeOtherPage,
+    closeAllPage
   }
 
 })
