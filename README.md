@@ -56,19 +56,29 @@ npm run lint
 - [X] 打开的标签页做持久化，否则刷新时会丢失
 - [ ] 自动引入elementPlus组件时，配置默认语言为中文
 - [X] 部署Github Page后，lowdb.write方式报错`TypeError: Converting circular structure to JSON`
+- [ ] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
 
 
+```json
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "allowSyntheticDefaultImports": false,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
+```
 
-# 介绍
 
-## 关于路由和菜单
-
-将路由和菜单整合到一份数据中，菜单数据由路由数据中产生。
-
-## 菜单是否在标签页显示功能实现的思考
-
-在路由的meta对象上新增一个tab属性，用以表示当前菜单是否在标签页显示。
-修正想法: 大部分菜单都是需要在标签页显示的，不显示的仅是少数。所以应该默认显示，不显示的通过`hidden:true`判断即可。
 
 
 

@@ -158,6 +158,8 @@ router.beforeEach(async (to) => {
         }
         // 收集标签页菜单数据
         pageStore.findAllInTabPage(permissionRoutes)
+        // 收集开启缓存的页面
+        pageStore.findKeepAliveRoute(permissionRoutes)
         // 从持久化数据中加载已打开的标签页信息
         pageStore.openedLoad()
         if(to.name === 'LoginView') {

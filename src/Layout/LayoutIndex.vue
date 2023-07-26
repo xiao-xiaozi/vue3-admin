@@ -6,6 +6,8 @@ import TabsPage from "./TabsPage.vue"
 import { useUserStore } from "@/stores/user";
 import router from "@/router";
 import util from "@/utils";
+import { usePageStore } from "@/stores/page";
+import { computed } from 'vue'
 
 const userStore = useUserStore()
 
@@ -15,13 +17,15 @@ function logout(){
     util.cookie.remove('token')
     router.push('/login')
     ElMessage.success('退出登录！')
-    // setTimeout(() => {
-    // }, 500)
   }).catch(() => {
     ElMessage.info('取消！')
   })
 }
 
+
+const pageStore = usePageStore()
+// 开启缓存的页面
+const cachePages = computed(() => [...pageStore.keepAliveRouteName])
 
 
 
@@ -59,11 +63,10 @@ function logout(){
           <!-- 打开的菜单 -->
           <TabsPage />
           <el-main class="layout-el-main">
-            <RouterView v-slot="{ Component,route }">
-              <KeepAlive>
-                <component :is="Component" v-if = "route.meta && route.meta.cache"></component>
+            <RouterView v-slot="{ Component }">
+              <KeepAlive :include="cachePages">
+                <component :is="Component"></component>
               </KeepAlive>
-              <component :is="Component" v-if="!route.meta || !route.meta.cache"></component>
             </RouterView>
           </el-main>
         </div>

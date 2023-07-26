@@ -4,7 +4,8 @@ require("@rushstack/eslint-patch/modern-module-resolution");
 module.exports = {
   root: true,
   extends: [
-    'plugin:vue/vue3-essential',
+    // 'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     'eslint:recommended',
   ],
   parserOptions: { ecmaVersion: 'latest', },
@@ -21,6 +22,10 @@ module.exports = {
     'vue/first-attribute-linebreak': ['warn', {
       "singleline": 'ignore',
       "multiline": "below"
+    }],
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "never"
     }],
     'vue/singleline-html-element-content-newline': 'off',
     'vue/html-indent': ['error', 2, {

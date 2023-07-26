@@ -1,7 +1,10 @@
 <script setup>
 import { usePageStore } from '@/stores/page';
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { useRouter } from "vue-router"
+import { ref } from "vue"
+import ContextMenu from "@/components/ContextMenu.vue"
+import ContextMenuItem from '../components/ContextMenuItem.vue';
 
 const router = useRouter()
 const pageStore = usePageStore()
@@ -35,21 +38,74 @@ function tabRemove(tabPaneName) {
   pageStore.closePage(closeRoute)
 }
 
+// 右键菜单
+let contentMenuX = ref(0)
+let contentMenuY = ref(0)
+let tagName = ref('')
+let contextmenuValue = ref(false)
+function handleContextmenu(event){
+  let target = event.target
+  let flag = false
+  if(target.className.indexOf('el-tabs__item') > -1) flag = true
+  else if(target.parentNode.className.indexOf('el-tabs__item') > -1) {
+    target = target.parentNode
+    flag = true
+  }
+  if(flag) {
+    event.preventDefault()
+    event.stopPropagation()
+    contentMenuX.value = event.clientX
+    contentMenuY.value = event.clientY
+    tagName.value = target.getAttribute('aria-controls').slice(5)
+    contextmenuValue.value = true
+  }
+}
+// 右键菜单数据
+const contextmenuList = reactive([
+  {
+    icon: 'arrow-left', title: '关闭左侧', value: 'left' 
+  },
+  {
+    icon: 'arrow-right', title: '关闭右侧', value: 'right' 
+  },
+  {
+    icon: 'times', title: '关闭其它', value: 'other' 
+  },
+  {
+    icon: 'times-circle', title: '关闭全部', value: 'all' 
+  }
+])
+// 右键菜单项的点击事件
+function contextmenuClick(command){
+  if(tagName.value) contextmenuValue.value = false
+  const params = { pageSelect: tagName }
+  switch(command) {
+    case 'left': pageStore.closeLeftPage(params);break
+    case 'right': pageStore.closeRightPage(params);break
+    case 'other': pageStore.closeOtherPage(params);break
+    case 'all': pageStore.closeAllPage(params);break
+  }
+}
+
 </script>
 <template>
   <div class="tabs-page">
+    <ContextMenu v-model="contextmenuValue" :x="contentMenuX" :y="contentMenuY">
+      <ContextMenuItem :menu-list="contextmenuList" @row-click="contextmenuClick" />
+    </ContextMenu>
     <el-tabs 
       v-model="currentPageName"
       type="card"
       :closable="true"
+      class="opened-page-tab"
       @tab-click="tabClick"
-      @tab-remove="tabRemove"
-      class="opened-page-tab">
+      @contextmenu="handleContextmenu"
+      @tab-remove="tabRemove">
       <el-tab-pane 
         v-for="page in openedPage"
         :key="page.path"
         :name="page.name"
-        :label="tabName(page)"></el-tab-pane>
+        :label="tabName(page)" />
     </el-tabs>
   </div>
 </template>
@@ -73,6 +129,7 @@ function tabRemove(tabPaneName) {
           padding: 0 20px;
         }
 
+        // el-tab-pane的closable参数配置覆盖不了el-tabs，通过CSS实现首页不可关闭
         .is-icon-close {
           width: 0;
         }
