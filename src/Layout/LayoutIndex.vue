@@ -40,13 +40,13 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
             class="logo"
             src="@/assets/logo.svg"
             width="50"
-            height="50" />
+            height="50">
         </div>
         <HeadMenu class="head-menu" />
         <div class="user-info">
           <span class="user-name">{{ userStore.userInfo.name }}</span>
           <el-dropdown class="dropdown-avatar">
-            <el-image :src="userStore.userInfo.avatarUrl" class="user-avatar"></el-image>
+            <el-image :src="userStore.userInfo.avatarUrl" class="user-avatar" />
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
@@ -63,9 +63,19 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
           <!-- 打开的菜单 -->
           <TabsPage />
           <el-main class="layout-el-main">
-            <RouterView v-slot="{ Component }">
+            <!-- <RouterView v-slot="{ Component }">
               <KeepAlive :include="cachePages">
-                <component :is="Component"></component>
+                <component :is="Component" />
+              </KeepAlive>
+            </RouterView> -->
+            <RouterView v-slot="{ Component, route }">
+              <KeepAlive :include="cachePages">
+                <Transition name="fade-transverse" mode="out-in">
+                  <!-- fix: Component inside <Transition> renders non-element root node that cannot be animated.  -->
+                  <div :key="route.name">
+                    <component :is="Component" :key="route.name" />
+                  </div>
+                </Transition>
               </KeepAlive>
             </RouterView>
           </el-main>
@@ -101,6 +111,7 @@ $aside-menu-background-color: #fff;
 
       .layout-el-main {
         height: calc(100% - 41px);
+        overflow: hidden;
       }
     }
   }
@@ -151,4 +162,19 @@ $aside-menu-background-color: #fff;
   }
 }
 
+// 过渡动画 横向渐变
+.fade-transverse-leave-active,
+.fade-transverse-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transverse-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transverse-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
 </style>

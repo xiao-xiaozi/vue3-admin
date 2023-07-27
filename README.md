@@ -44,11 +44,10 @@ npm run lint
 # Todo
 - [ ] 自定义指令判断是否渲染当前元素
 - [x] 页面的缓存机制配置
-- [ ] 菜单icon因为按需引入缘故，通过component加载时无法正常显示。手动引入或其他方法？
-- [ ] 带参数页面的缓存
+- [ ] 菜单icon因为按需引入缘故，通过component加载时无法正常显示。手动引入或其他方法？手动引入
 - [x] 维护当前打开的页面数据
 - [X] 接入easy-mock加载mock数据
-- [ ] 页面切换动画
+- [X] 页面切换动画
 - [X] 打开的标签页信息中首页不可删除，不显示删除按钮。
 - [X] 简易的登录页以及后台渲染基础框架
 - [X] 动态挂载菜单
@@ -56,7 +55,7 @@ npm run lint
 - [X] 打开的标签页做持久化，否则刷新时会丢失
 - [ ] 自动引入elementPlus组件时，配置默认语言为中文
 - [X] 部署Github Page后，lowdb.write方式报错`TypeError: Converting circular structure to JSON`
-- [ ] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
+- [X] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
 
 
 ```json
@@ -65,6 +64,8 @@ npm run lint
         "target": "es2016",
         "allowSyntheticDefaultImports": false,
         "baseUrl": "./",
+        "module": "esnext", //使用模块化的时候，使用es的模块化
+        "moduleResolution": "node", //模块的查找顺序按照node的顺序进行查找
         "paths": {
             "@/*": [
                 "src/*"
@@ -77,6 +78,7 @@ npm run lint
     ]
 }
 ```
+加上`"module": "esnext"` 和 `"moduleResolution": "node"` 配置可解决模块导入问题。（组件名绿色丢失和Vue方法自动导入）
 
 
 
