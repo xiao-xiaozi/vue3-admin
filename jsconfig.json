@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+      "target": "es2016",
+      "allowSyntheticDefaultImports": false,
+      "baseUrl": "./",
+      "module": "esnext", //使用模块化的时候，使用es的模块化
+      "moduleResolution": "node", //模块的查找顺序按照node的顺序进行查找
+      "paths": {
+          "@/*": [
+              "src/*"
+          ]
+      }
+  },
+  "exclude": [
+      "node_modules",
+      "dist"
+  ],
+}

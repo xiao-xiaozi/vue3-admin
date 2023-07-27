@@ -55,7 +55,7 @@ npm run lint
 - [X] 打开的标签页做持久化，否则刷新时会丢失
 - [ ] 自动引入elementPlus组件时，配置默认语言为中文
 - [X] 部署Github Page后，lowdb.write方式报错`TypeError: Converting circular structure to JSON`
-- [ ] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
+- [X] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
 
 
 ```json
@@ -64,6 +64,8 @@ npm run lint
         "target": "es2016",
         "allowSyntheticDefaultImports": false,
         "baseUrl": "./",
+        "module": "esnext", //使用模块化的时候，使用es的模块化
+        "moduleResolution": "node", //模块的查找顺序按照node的顺序进行查找
         "paths": {
             "@/*": [
                 "src/*"
@@ -76,6 +78,7 @@ npm run lint
     ]
 }
 ```
+加上`"module": "esnext"` 和 `"moduleResolution": "node"` 配置可解决模块导入问题。（组件名绿色丢失和Vue方法自动导入）
 
 
 
