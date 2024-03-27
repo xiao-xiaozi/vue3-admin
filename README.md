@@ -53,7 +53,7 @@ npm run lint
 - [X] 动态挂载菜单
   - [X] 处理可在标签页打开的菜单,预期在route.mete中新增inTab属性
 - [X] 打开的标签页做持久化，否则刷新时会丢失
-- [ ] 自动引入elementPlus组件时，配置默认语言为中文
+- [X] 自动引入elementPlus组件时，配置默认语言为中文
 - [X] 部署Github Page后，lowdb.write方式报错`TypeError: Converting circular structure to JSON`
 - [X] 使用`jsconfig.json`配置，导致组件名称的绿色颜色没有了，同时`computed`等方法无法自动导入。但可以联想路径，配置有问题？？？
 
