@@ -11,4 +11,6 @@ onMounted(() => {
 
 </script>
 
-<template>Main</template>
+<template>
+  <div>Main</div>
+</template>

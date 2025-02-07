@@ -11,7 +11,7 @@ import { computed } from 'vue'
 
 const userStore = useUserStore()
 
-function logout(){
+function logout() {
   ElMessageBox.confirm('确定注销登录吗？', '提示', { type: 'warning', }).then(() => {
     userStore.resetAllState()
     util.cookie.remove('token')
@@ -35,12 +35,7 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
     <el-container>
       <el-header>
         <div class="head-left">
-          <img
-            alt="Vue logo"
-            class="logo"
-            src="@/assets/logo.svg"
-            width="50"
-            height="50">
+          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50">
         </div>
         <HeadMenu class="head-menu" />
         <div class="user-info">
@@ -63,20 +58,12 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
           <!-- 打开的菜单 -->
           <TabsPage />
           <el-main class="layout-el-main">
-            <!-- <RouterView v-slot="{ Component }">
-              <KeepAlive :include="cachePages">
-                <component :is="Component" />
-              </KeepAlive>
-            </RouterView> -->
             <RouterView v-slot="{ Component, route }">
-              <KeepAlive :include="cachePages">
-                <Transition name="fade-transverse" mode="out-in">
-                  <!-- fix: Component inside <Transition> renders non-element root node that cannot be animated.  -->
-                  <div :key="route.name">
+              <Transition name="fade-transverse" mode="out-in">
+                  <KeepAlive :include="cachePages">
                     <component :is="Component" :key="route.name" />
-                  </div>
-                </Transition>
-              </KeepAlive>
+                  </KeepAlive>
+              </Transition>
             </RouterView>
           </el-main>
         </div>
