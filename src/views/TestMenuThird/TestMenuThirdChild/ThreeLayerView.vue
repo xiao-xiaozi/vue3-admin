@@ -1,3 +1,5 @@
 <script setup></script>
-<template>test-three -> child-three -> CTOne</template>
+<template>
+    <div>test-three -> child-three -> CTOne</div>
+</template>
 <!-- <style lang="scss" scoped></style> -->
