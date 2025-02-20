@@ -10,11 +10,11 @@ const isCollapse = computed(() => menuStore.asideIsCollapse)
 </script>
 <template>
   <el-menu
+    v-if="menus.length"
     class="layout-aside-menu"
     :default-active="menuStore.activeMenu"
     :router="true"
-    :collapse="isCollapse"
-    v-if="menus.length">
+    :collapse="isCollapse">
     <template v-for="menu in menus" :key="menu.path">
       <SubMenu v-if="menu.children" :menu="menu" />
       <el-menu-item v-else :index="menu.path">{{ menu.title }}</el-menu-item>

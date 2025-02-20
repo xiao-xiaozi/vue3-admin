@@ -68,13 +68,13 @@ console.log(import.meta.env.PROD)
           <el-form-item label="用户名" prop="username">
             <el-input
               v-model="formData.username"
-              placeholder="请输入用户名"></el-input>
+              placeholder="请输入用户名" />
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input
-              type="password"
               v-model="formData.password"
-              placeholder="请输入密码"></el-input>
+              type="password"
+              placeholder="请输入密码" />
           </el-form-item>
         </el-form>
         <el-button type="primary" class="login-btn" @click="loginClick">

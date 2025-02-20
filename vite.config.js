@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
       Inspect()
     ],
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), }, },
-    css: { preprocessorOptions: { scss: { additionalData: `@import "@/assets/style/variable.scss";`, }, }, },
+    css: { preprocessorOptions: { scss: { additionalData: `@use "@/assets/style/variable.scss";`, }, }, },
     define: { "APP_VERSION": JSON.stringify(process.env.npm_package_version) }
   }
 })

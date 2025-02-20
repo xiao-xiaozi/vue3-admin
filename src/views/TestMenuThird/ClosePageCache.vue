@@ -8,7 +8,7 @@ const formData = reactive({
 <template>
   <el-form :model="formData">
     <el-form-item label="输入框">
-      <el-input v-model="formData.input" placeholder=""></el-input>
+      <el-input v-model="formData.input" placeholder="" />
     </el-form-item>
     <el-form-item label="多选框">
       <el-checkbox-group v-model="formData.checked">

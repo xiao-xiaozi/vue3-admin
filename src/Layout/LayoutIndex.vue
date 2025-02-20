@@ -35,7 +35,12 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
     <el-container>
       <el-header>
         <div class="head-left">
-          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50">
+          <img
+            alt="Vue logo"
+            class="logo"
+            src="@/assets/logo.svg"
+            width="50"
+            height="50">
         </div>
         <HeadMenu class="head-menu" />
         <div class="user-info">
@@ -60,9 +65,9 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
           <el-main class="layout-el-main">
             <RouterView v-slot="{ Component, route }">
               <Transition name="fade-transverse" mode="out-in">
-                  <KeepAlive :include="cachePages">
-                    <component :is="Component" :key="route.name" />
-                  </KeepAlive>
+                <KeepAlive :include="cachePages">
+                  <component :is="Component" :key="route.name" />
+                </KeepAlive>
               </Transition>
             </RouterView>
           </el-main>
@@ -72,8 +77,6 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
   </div>
 </template>
 <style lang="scss" scoped>
-@import "@/assets/style/variable";
-
 $aside-menu-width: 210px;
 $head-menu-background-color: #f7f7f7;
 $head-left-background-color: #fcfcfc;
@@ -164,4 +167,5 @@ $aside-menu-background-color: #fff;
   opacity: 0;
   transform: translateX(30px);
 }
+
 </style>

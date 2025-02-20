@@ -16,6 +16,7 @@ function backToHome(){
 .content {
   line-height:50vh;
   text-align: center;
+
   .tip-text {
     font-size:40px;
     font-weight:bold;
@@ -25,6 +26,7 @@ function backToHome(){
 button {
   --bg: #e74c3c;
   --text-color: #fff;
+
   position: relative;
   width: 150px;
   border: none;
@@ -37,7 +39,7 @@ button {
   border-radius: 5px;
   opacity: 0.8;
   letter-spacing: 1px;
-  box-shadow: #c0392b 0px 7px 2px, #000 0px 8px 5px;
+  box-shadow: #c0392b 0 7px 2px, #000 0 8px 5px;
   cursor:pointer;
 }
 
@@ -47,6 +49,6 @@ button:hover {
 
 button:active {
   top: 4px;
-  box-shadow: #c0392b 0px 3px 2px, #000 0px 3px 5px;
+  box-shadow: #c0392b 0 3px 2px, #000 0 3px 5px;
 }
 </style>

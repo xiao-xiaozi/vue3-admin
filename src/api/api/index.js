@@ -5,8 +5,8 @@ import { convertRESTAPI } from '../util';
 function login_post(opts) {
   return instance({
     method: 'post',
-    url:  '/login',
-    opts: opts
+    url: '/login',
+    opts
   });
 }
 
@@ -14,8 +14,8 @@ function login_post(opts) {
 function userResource_get(opts) {
   return instance({
     method: 'get',
-    url:  '/userResource',
-    opts: opts
+    url: '/userResource',
+    opts
   });
 }
 
@@ -24,7 +24,7 @@ function restful_id_list_get(opts) {
   return instance({
     method: 'get',
     url: convertRESTAPI('/restful/:id/list', opts),
-    opts: opts
+    opts
   });
 }
 
@@ -32,8 +32,8 @@ function restful_id_list_get(opts) {
 function proxy_get(opts) {
   return instance({
     method: 'get',
-    url:  '/proxy',
-    opts: opts
+    url: '/proxy',
+    opts
   });
 }
 
@@ -41,8 +41,8 @@ function proxy_get(opts) {
 function mock_get(opts) {
   return instance({
     method: 'get',
-    url:  '/mock',
-    opts: opts
+    url: '/mock',
+    opts
   });
 }
 
@@ -50,8 +50,8 @@ function mock_get(opts) {
 function _get(opts) {
   return instance({
     method: 'get',
-    url:  '/',
-    opts: opts
+    url: '/',
+    opts
   });
 }
 
@@ -59,8 +59,8 @@ function _get(opts) {
 function upload_post(opts) {
   return instance({
     method: 'post',
-    url:  '/upload',
-    opts: opts
+    url: '/upload',
+    opts
   });
 }
 
@@ -68,8 +68,8 @@ function upload_post(opts) {
 function query_get(opts) {
   return instance({
     method: 'get',
-    url:  '/query',
-    opts: opts
+    url: '/query',
+    opts
   });
 }
 

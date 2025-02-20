@@ -9,10 +9,10 @@ const formData = reactive({
 <template>
   <el-form :model="formData">
     <el-form-item label="用户名">
-      <el-input v-model="formData.username" placeholder=""></el-input>
+      <el-input v-model="formData.username" placeholder="" />
     </el-form-item>
     <el-form-item label="密码">
-      <el-input v-model="formData.password" placeholder=""></el-input>
+      <el-input v-model="formData.password" placeholder="" />
     </el-form-item>
     <el-form-item label="登录方式">
       <el-radio-group v-model="formData.radioValue">
