@@ -1,4 +1,7 @@
 module.exports = {
+    plugins:[
+        "@stylistic/stylelint-plugin"
+    ],
     extends: [
         "stylelint-config-standard",
         "stylelint-config-standard-scss",
@@ -6,8 +9,10 @@ module.exports = {
     ],
     customSyntax: 'postcss-html',
     rules:{
-        'indentation': 2,
-        "selector-class-pattern":"[a-z]+[-_]?"
+        "selector-class-pattern":"[a-z]+[-_]?",
         // 'declaration-property-value-disallowed-list':[]
+
+        // stylistic rules from @stylistic/stylelint-plugin:
+        "@stylistic/indentation":2
     }
 }
