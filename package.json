@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.21",
     "tinymce": "^7.9.1",
     "vue": "^3.2.38",

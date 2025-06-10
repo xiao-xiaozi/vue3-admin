@@ -6,6 +6,8 @@ import menuComponentMap from "./menuComponentMap";
 import { cloneDeep } from "lodash"
 import { useUserStore } from "@/stores/user";
 import util from "@/utils";
+import NProgress from "nprogress";
+import 'nprogress/nprogress.css'
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -124,6 +126,8 @@ function handlePermissionRoutes(routes) {
 // 全局前置守卫
 router.beforeEach(async (to) => {
   try {
+    NProgress.start()
+
     let menuStore = useMenuStore();
     let userStore = useUserStore();
     let pageStore = usePageStore()
@@ -162,6 +166,7 @@ router.beforeEach(async (to) => {
         pageStore.findKeepAliveRoute(permissionRoutes)
         // 从持久化数据中加载已打开的标签页信息
         pageStore.openedLoad()
+
         if(to.name === 'LoginView') {
           return { name: 'HomeView' }
         }else {
@@ -170,6 +175,7 @@ router.beforeEach(async (to) => {
       }
     }else {
       if(to.name !== 'LoginView') {
+        NProgress.done()
         return { name: 'LoginView' }
       }
     }
@@ -180,6 +186,7 @@ router.beforeEach(async (to) => {
 
 // 全局后置钩子
 router.afterEach((to) => {
+  NProgress.done()
   // 将打开的页面加入到已打开页面进行维护
   let pageStore = usePageStore()
   pageStore.openPage(to)
