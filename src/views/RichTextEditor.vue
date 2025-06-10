@@ -13,12 +13,14 @@ const initOptions = ref({
   resize: false
 })
 
+const dir = import.meta.env.VITE_APP_BASE  + "tinymce/tinymce.min.js"
+
 </script>
 <template>
   <editor
     id="uuid"
     api-key="no-api-key"
     license-key="gpl"
-    tinymce-script-src="/tinymce/tinymce.min.js"
+    :tinymce-script-src="dir"
     :init="initOptions" />
 </template>

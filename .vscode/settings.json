@@ -18,6 +18,7 @@
         "iconify",
         "rushstack",
         "stylelint",
-        "unplugin"
+        "unplugin",
+        "VITE"
     ],
 }
