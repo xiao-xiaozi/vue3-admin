@@ -25,7 +25,8 @@ export default [
         computed: 'readonly',
         watch: 'readonly',
         watchEffect: 'readonly',
-        onMounted: 'readonly'
+        onMounted: 'readonly',
+        reactive: 'readonly'
       },
     },
   },

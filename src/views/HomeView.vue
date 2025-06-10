@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 
 const enOrDeCode = ref('')
 const enOrDeCodeResult =ref('')
