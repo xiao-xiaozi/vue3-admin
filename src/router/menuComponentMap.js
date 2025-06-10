@@ -4,5 +4,6 @@ export default {
   "testMenuSecond": () => import('@/views/TestMenuSecond.vue'),
   "pageCache": () => import('@/views/TestMenuThird/PageCache.vue'),
   "closePageCache": () => import('@/views/TestMenuThird/ClosePageCache.vue'),
-  "threeLayerView": () => import('@/views/TestMenuThird/TestMenuThirdChild/ThreeLayerView.vue')
+  "threeLayerView": () => import('@/views/TestMenuThird/TestMenuThirdChild/ThreeLayerView.vue'),
+  "richTextEditor": () => import('@/views/RichTextEditor.vue')
 }

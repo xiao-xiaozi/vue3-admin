@@ -20,7 +20,12 @@ export default [
         ElMessage: 'readonly',
         ElMessageBox: 'readonly',
         process: 'readonly',
-        APP_VERSION: 'readonly'
+        APP_VERSION: 'readonly',
+        ref: 'readonly',
+        computed: 'readonly',
+        watch: 'readonly',
+        watchEffect: 'readonly',
+        onMounted: 'readonly'
       },
     },
   },
