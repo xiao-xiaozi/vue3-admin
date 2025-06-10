@@ -11,9 +11,9 @@ const formData = reactive({
     </el-form-item>
     <el-form-item label="多选框">
       <el-checkbox-group v-model="formData.checked">
-        <el-checkbox :label="1">Vue</el-checkbox>
-        <el-checkbox :label="2">React</el-checkbox>
-        <el-checkbox :label="3">Angular</el-checkbox>
+        <el-checkbox :value="1">Vue</el-checkbox>
+        <el-checkbox :value="2">React</el-checkbox>
+        <el-checkbox :value="3">Angular</el-checkbox>
       </el-checkbox-group>
     </el-form-item>
   </el-form>
