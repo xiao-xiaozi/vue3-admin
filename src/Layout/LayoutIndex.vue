@@ -96,12 +96,13 @@ $aside-menu-background-color: #fff;
     }
 
     .layout-container-main {
+      flex:1;
       height: 100%;
-      width: 100%;
+
 
       .layout-el-main {
         height: calc(100% - 41px);
-        overflow: hidden;
+        overflow: auto;
       }
     }
   }

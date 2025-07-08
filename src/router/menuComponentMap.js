@@ -5,5 +5,7 @@ export default {
   "normalPage": () => import('@/views/testMenu/NormalPage.vue'),
   "pageCache": () => import('@/views/testMenu/PageCache.vue'),
   "pageNotCache": () => import('@/views/testMenu/PageNotCache.vue'),
-  "thirdLevelMenu": ()=>import('@/views/testMenu/ThirdLevelMenu.vue')
+  "thirdLevelMenu": ()=>import('@/views/testMenu/ThirdLevelMenu.vue'),
+  "containerCom": () => import('@/views/component/ContainerCom.vue'),
+  'infiniteScroll': () => import('@/views/component/InfiniteScroll.vue')
 }

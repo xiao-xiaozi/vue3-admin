@@ -8,6 +8,7 @@ import { useUserStore } from "@/stores/user";
 import util from "@/utils";
 import NProgress from "nprogress";
 import 'nprogress/nprogress.css'
+import staticRoutes from "@/mock/menu.js"
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -30,59 +31,6 @@ const router = createRouter({
         }
       ]
     },
-    // {
-    //   path: "/test-two",
-    //   component: Layout,
-    //   meta: { title: 'TestTwo' },
-    //   children: [
-    //     // 参考：https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
-    //     {
-    //       path: '',
-    //       name: 'TestTwo',
-    //       component: () => import("@/views/TestTwo.vue")
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: "/test-three",
-    //   name: "TestThree",
-    //   redirect: "/test-three/closePageCache",
-    //   component: Layout,
-    //   meta: { title: '测试菜单3' },
-    //   children: [
-    //     {
-    //       path: "closePageCache",
-    //       name: "ClosePageCache",
-    //       component: () => import("@/views/testThree/ClosePageCache.vue"),
-    //       meta: {
-    //         cache: false, 
-    //         title: '页面不开启缓存' 
-    //       }
-    //     },
-    //     {
-    //       path: "pageCache",
-    //       name: "PageCache",
-    //       component: () => import("@/views/testThree/PageCache.vue"),
-    //       meta: {
-    //         cache: true, 
-    //         title: '开启页面缓存' 
-    //       }
-    //     },
-    //     {
-    //       path: "child-3",
-    //       name: "ChildThree",
-    //       redirect: "/test-three/child-3/CT-one",
-    //       children: [
-    //         {
-    //           path: "CT-one",
-    //           name: "CTOne",
-    //           component: () => import("@/views/testThree/ChildThree/CTone.vue")
-    //           ,meta: { title: '测试菜单3-3-1' }
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
     {
       path: "/login",
       name: "LoginView",
@@ -147,12 +95,15 @@ router.beforeEach(async (to) => {
         }
       }else {
         let { data: { permissionRoutes, userInfo }} = await api.userResourceGet()
-        let menus = cloneDeep(permissionRoutes)
+        
+        const fullRoutes = [...permissionRoutes, ...staticRoutes,]
+        
+        let menus = cloneDeep(fullRoutes)
         handleMenus(menus)
         menuStore.setMenus(menus)
-        // 处理动态路由并挂载
-        handlePermissionRoutes(permissionRoutes)
-        permissionRoutes.forEach(route => {
+
+        handlePermissionRoutes(fullRoutes)
+        fullRoutes.forEach(route =>{
           router.addRoute(route)
         })
         userStore.setHasPermissionInfo(true)
@@ -161,9 +112,9 @@ router.beforeEach(async (to) => {
           userStore.setUserInfo(userInfo)
         }
         // 收集标签页菜单数据
-        pageStore.findAllInTabPage(permissionRoutes)
+        pageStore.findAllInTabPage(fullRoutes)
         // 收集开启缓存的页面
-        pageStore.findKeepAliveRoute(permissionRoutes)
+        pageStore.findKeepAliveRoute(fullRoutes)
         // 从持久化数据中加载已打开的标签页信息
         pageStore.openedLoad()
 
