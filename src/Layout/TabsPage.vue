@@ -63,16 +63,16 @@ function handleContextmenu(event){
 // 右键菜单数据
 const contextmenuList = reactive([
   {
-    icon: 'arrow-left', title: '关闭左侧', value: 'left' 
+    icon: 'back', title: '关闭左侧', value: 'left' 
   },
   {
-    icon: 'arrow-right', title: '关闭右侧', value: 'right' 
+    icon: 'right', title: '关闭右侧', value: 'right' 
   },
   {
-    icon: 'times', title: '关闭其它', value: 'other' 
+    icon: 'Close', title: '关闭其它', value: 'other' 
   },
   {
-    icon: 'times-circle', title: '关闭全部', value: 'all' 
+    icon: 'CircleClose', title: '关闭全部', value: 'all' 
   }
 ])
 // 右键菜单项的点击事件

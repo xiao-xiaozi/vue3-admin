@@ -24,7 +24,10 @@ function rowClick(event){
       :key="item.value"
       :data-value="item.value"
       class="contextmenu-item">
-      <!-- Todo：加上icon -->
+      <IconEpBack v-if="item.icon === 'back'" />
+      <IconEpRight v-else-if="item.icon==='right'" />
+      <IconEpClose v-else-if="item.icon==='Close'" />
+      <IconEpCircleClose v-else-if="item.icon === 'CircleClose'" />
       <div class="contextmenu-title">{{ item.title }}</div>
     </div>
   </div>
@@ -32,11 +35,16 @@ function rowClick(event){
 <style lang="scss" scoped>
 .custom-contextmenu-item {
   .contextmenu-item {
-    padding: 8px 20px 8px 15px;
+    display: flex;
+    padding: 8px 10px;
     margin: 0;
     font-size: 14px;
     color: #606266;
     cursor: pointer;
+
+    .contextmenu-title {
+      margin-left: 4px;
+    }
 
     &:hover {
       background: #ecf5ff;
