@@ -35,18 +35,7 @@ export const usePageStore = defineStore('page', () => {
    * @param {*} route 
    */
   function addOpened(route){
-    // Error: Avoid app logic that relies on enumerating keys on a component instance. The keys will be empty in production mode to avoid performance overhead.
-    // opened.push(route)
-    // inTab属性为true时，才将路由放入标签页中
-    // if(Reflect.has(route.meta,'inTab') && route.meta.inTab) {
-    //   opened.push(route)
-    // }
-    // 修改是否加入到打开的标签页判断
-    // 取消inTab, 通过hidden判断
-    if(Reflect.has(route.meta,'hidden') && route.meta.hidden) {
-      return
-    }else {
-      // opened.push(route)
+    if(!route.meta.hidden) {
       opened.push({
         name: route.name, 
         path: route.path,
