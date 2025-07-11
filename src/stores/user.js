@@ -8,6 +8,7 @@ export const useUserStore = defineStore('user', () => {
     avatarUrl: 'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTK6QGdM32bNY7Qha63Pyp3HrphweuHPe4ZUvbtCr6SKaEGOFLMqLUaZXaX0hZx6xtkdiafeKqiacVpw/132' 
   })
 
+
   /**
    * 更新用户信息
    * @param {*} newUserInfo 
@@ -27,11 +28,18 @@ export const useUserStore = defineStore('user', () => {
     hasPermissionInfo.value = false
   }
 
+  let permissionCode = ref([]) // 权限code
+  function setPermissionCode(codes) {
+    if(Array.isArray(codes)) permissionCode.value = codes
+  }
+
   return {
     userInfo,
     hasPermissionInfo,
+    permissionCode,
     setHasPermissionInfo,
     resetAllState,
-    setUserInfo
+    setUserInfo,
+    setPermissionCode
   }
 })

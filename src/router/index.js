@@ -94,7 +94,11 @@ router.beforeEach(async (to) => {
           return true
         }
       }else {
-        let { data: { permissionRoutes, userInfo }} = await api.userResourceGet()
+        let {
+          data: {
+            permissionRoutes, permissionCode,userInfo, 
+          }
+        } = await api.userResourceGet()
         
         const fullRoutes = [...permissionRoutes, ...staticRoutes,]
         
@@ -117,6 +121,8 @@ router.beforeEach(async (to) => {
         pageStore.findKeepAliveRoute(fullRoutes)
         // 从持久化数据中加载已打开的标签页信息
         pageStore.openedLoad()
+        // 权限code
+        userStore.setPermissionCode(permissionCode)
 
         if(to.name === 'LoginView') {
           return { name: 'HomeView' }
