@@ -45,7 +45,6 @@ function loginClick() {
 
 }
 
-console.log(import.meta.env.PROD)
 
 
 </script>

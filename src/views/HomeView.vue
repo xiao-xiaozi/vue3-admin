@@ -14,11 +14,19 @@ const val = ref('')
 const valResult = ref('')
 
 function atobFn() {
-  valResult.value = atob(val.value)
+  // valResult.value = atob(val.value)
+  let binary = atob(val.value)
+  let bytes = Uint8Array.from(binary, c=>c.charCodeAt(0))
+  let decoder = new TextDecoder()
+  valResult.value = decoder.decode(bytes)
 }
 
 function btoaFn() {
-  valResult.value = btoa(val.value)
+  // valResult.value = btoa(val.value)
+  let encoder = new TextEncoder()
+  let bytes = encoder.encode(val.value)
+  let binary = String.fromCharCode(...bytes)
+  valResult.value = btoa(binary)
 }
 
 </script>
