@@ -2,8 +2,6 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useMenuStore = defineStore("menu", () => {
-  // 标记是否已拉取异步菜单，登录信息等数据
-  let hasPermission = ref(false)
   // 默认打开菜单
   let activeMenu = ref("/index");
   // 首页固定显示
@@ -51,12 +49,11 @@ export const useMenuStore = defineStore("menu", () => {
     asideIsCollapse.value = !asideIsCollapse.value
   }
 
-  return { 
+  return {
     activeMenu,
     asideIsCollapse,
     menus,
     asideMenu,
-    hasPermission,
     setCurrentMenu,
     changeAsideIsCollapse,
     setMenus
