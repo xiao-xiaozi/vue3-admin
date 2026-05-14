@@ -256,7 +256,7 @@ export const usePageStore = defineStore('page', () => {
    */
   function closeAllPage(){
     for(let i = opened.length - 1; i >=0; i--) {
-      if(opened[i] === 'HomeView') continue
+      if(opened[i].name === 'HomeView') continue
       opened.splice(i,1)
     }
     // 更新持久化数据
