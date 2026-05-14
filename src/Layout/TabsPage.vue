@@ -14,7 +14,7 @@ function tabName(route) {
   if(Reflect.has(route, 'meta')) {
     return route.meta.title || route.label
   }else {
-    route.label
+    return route.label
   }
 }
 
