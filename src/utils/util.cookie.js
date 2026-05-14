@@ -10,8 +10,12 @@ const cookiePrefix = 'vue3-admin'
  * @param {*} value 
  * @param {*} cookieSetting 
  */
-cookies.set = function(name = 'default', value = '', cookieSetting = { expires: 1 }) {
-  Cookies.set(`${cookiePrefix}-${APP_VERSION}-${name}`, value, cookieSetting)
+cookies.set = function(name = 'default', value = '', cookieSetting = {}) {
+  const defaultSetting = {
+    expires: 1,
+    sameSite: 'Strict',
+  }
+  Cookies.set(`${cookiePrefix}-${APP_VERSION}-${name}`, value, { ...defaultSetting, ...cookieSetting })
 }
 
 /**
