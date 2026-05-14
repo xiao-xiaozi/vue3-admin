@@ -192,10 +192,10 @@ export const usePageStore = defineStore('page', () => {
    * @param {*} param0 
    */
   function closeLeftPage({ pageSelect } = {}){
-    let clickPage = ref(pageSelect || currentPageName)
+    let clickPage = pageSelect || currentPageName.value
     let currentIndex = 0
     opened.forEach((page, index) => {
-      if(page.name === clickPage.value) currentIndex = index 
+      if(page.name === clickPage) currentIndex = index
     })
     if(currentIndex > 0) {
       // 关闭打开的页面，并在缓存设置中删除
@@ -207,7 +207,7 @@ export const usePageStore = defineStore('page', () => {
     // 更新持久化数据
     opened2db()
     // 导航到右键点击的页面
-    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+    if(clickPage !== currentPageName.value) router.push({ name: clickPage })
   }
 
   /**
@@ -215,10 +215,10 @@ export const usePageStore = defineStore('page', () => {
    * @param {*} param0 
    */
   function closeRightPage({ pageSelect } = {}){
-    let clickPage = ref(pageSelect || currentPageName)
+    let clickPage = pageSelect || currentPageName.value
     let currentIndex = 0;
     opened.forEach((page, index) => {
-      if(page.name === clickPage.value) currentIndex = index
+      if(page.name === clickPage) currentIndex = index
     })
     if(currentIndex > 0) {
       for(let i = opened.length - 1; i >=0; i--) {
@@ -229,16 +229,16 @@ export const usePageStore = defineStore('page', () => {
     // 更新持久化数据
     opened2db();
     // 导航到右键点击的页面
-    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+    if(clickPage !== currentPageName.value) router.push({ name: clickPage })
   }
 
   /**
    * 关闭其它页面
-   * @param {*} param0 
+   * @param {*} param0
    */
   function closeOtherPage({ pageSelect } = {}){
-    let clickPage = ref(pageSelect || currentPageName)
-    let index = opened.findIndex(page => page.name === clickPage.value)
+    let clickPage = pageSelect || currentPageName.value
+    let index = opened.findIndex(page => page.name === clickPage)
     if(index >= 0) {
       for(let i = opened.length - 1; i >=0; i--) {
         if(opened[i].name === 'HomeView' || i === index) continue
@@ -248,7 +248,7 @@ export const usePageStore = defineStore('page', () => {
     // 更新持久化数据
     opened2db();
     // 导航到右键点击的页面
-    if(clickPage.value !== currentPageName.value) router.push({ name: clickPage.value })
+    if(clickPage !== currentPageName.value) router.push({ name: clickPage })
   }
 
   /**
