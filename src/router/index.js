@@ -86,7 +86,7 @@ router.beforeEach(async (to) => {
       // 判断是否已获取权限信息(菜单，用户信息等)
       // hasPermissionInfo 通过是否已获取权限信息字段来判断
       if(userStore.hasPermissionInfo) {
-        if(to.path === 'LoginView') {
+        if(to.name === 'LoginView') {
           return { name: 'HomeView' }
         }else {
           // 设置当前打开的菜单
