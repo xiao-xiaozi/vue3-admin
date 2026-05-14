@@ -138,7 +138,7 @@ export const usePageStore = defineStore('page', () => {
       valid.push(find ? 1 : 0)
       // 返回合并后的数据 新的覆盖旧的
       // 新的数据中一般不会携带 params 和 query, 所以旧的参数会留存
-      return merge({}, opened, find)
+      return merge({}, page, find)
     }).filter((el,index) => valid[index] === 1)
     // 将持久化打开的标签页赋值到opened
     opened.length = 0
