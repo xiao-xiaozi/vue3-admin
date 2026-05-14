@@ -137,7 +137,11 @@ router.beforeEach(async (to) => {
       }
     }
   }catch(error){
-    console.log(error)
+    NProgress.done()
+    console.error('权限信息加载失败:', error)
+    if (to.name !== 'LoginView') {
+      return { name: 'LoginView' }
+    }
   }
 });
 
