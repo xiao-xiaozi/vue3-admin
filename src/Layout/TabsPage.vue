@@ -14,7 +14,7 @@ function tabName(route) {
   if(Reflect.has(route, 'meta')) {
     return route.meta.title || route.label
   }else {
-    route.label
+    return route.label
   }
 }
 
@@ -78,7 +78,7 @@ const contextmenuList = reactive([
 // 右键菜单项的点击事件
 function contextmenuClick(command){
   if(tagName.value) contextmenuValue.value = false
-  const params = { pageSelect: tagName }
+  const params = { pageSelect: tagName.value }
   switch(command) {
     case 'left': pageStore.closeLeftPage(params);break
     case 'right': pageStore.closeRightPage(params);break

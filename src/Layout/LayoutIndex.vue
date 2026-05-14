@@ -63,13 +63,15 @@ const cachePages = computed(() => [...pageStore.keepAliveRouteName])
           <!-- 打开的菜单 -->
           <TabsPage />
           <el-main class="layout-el-main">
-            <RouterView v-slot="{ Component, route }">
-              <Transition name="fade-transverse" mode="out-in">
-                <KeepAlive :include="cachePages">
-                  <component :is="Component" :key="route.name" />
-                </KeepAlive>
-              </Transition>
-            </RouterView>
+            <div class="transition-wrapper">
+              <RouterView v-slot="{ Component, route }">
+                <Transition name="fade-transverse" mode="out-in">
+                  <KeepAlive :include="cachePages">
+                    <component :is="Component" :key="route.name" />
+                  </KeepAlive>
+                </Transition>
+              </RouterView>
+            </div>
           </el-main>
         </div>
       </div>
@@ -103,6 +105,10 @@ $aside-menu-background-color: #fff;
       .layout-el-main {
         height: calc(100% - 41px);
         overflow: auto;
+
+        .transition-wrapper {
+          overflow: hidden;
+        }
       }
     }
   }

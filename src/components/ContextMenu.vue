@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watchEffect, onMounted, ref } from "vue"
+import { computed, watch, onMounted, onUnmounted, ref } from "vue"
 
 const props = defineProps({
   modelValue: {
@@ -33,14 +33,23 @@ function watchContextmenu(event){
   window.removeEventListener('mousedown', watchContextmenu)
 }
 
-watchEffect(() => {
-  if(props.modelValue) {
+watch(() => props.modelValue, (val) => {
+  if (val) {
     window.addEventListener('mousedown', watchContextmenu)
+  } else {
+    window.removeEventListener('mousedown', watchContextmenu)
   }
 })
 
 onMounted(() => {
   document.querySelector('body').appendChild(contextmenuRef.value)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('mousedown', watchContextmenu)
+  if (contextmenuRef.value && contextmenuRef.value.parentNode) {
+    contextmenuRef.value.parentNode.removeChild(contextmenuRef.value)
+  }
 })
 
 

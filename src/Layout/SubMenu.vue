@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ menu: { type: Object,default: () => {} }});
+defineProps({ menu: { type: Object, default: () => ({}) }});
 </script>
 <template>
   <el-sub-menu :index="menu.path">

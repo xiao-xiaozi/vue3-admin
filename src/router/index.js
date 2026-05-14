@@ -86,7 +86,7 @@ router.beforeEach(async (to) => {
       // 判断是否已获取权限信息(菜单，用户信息等)
       // hasPermissionInfo 通过是否已获取权限信息字段来判断
       if(userStore.hasPermissionInfo) {
-        if(to.path === 'LoginView') {
+        if(to.name === 'LoginView') {
           return { name: 'HomeView' }
         }else {
           // 设置当前打开的菜单
@@ -120,7 +120,7 @@ router.beforeEach(async (to) => {
         // 收集开启缓存的页面
         pageStore.findKeepAliveRoute(fullRoutes)
         // 从持久化数据中加载已打开的标签页信息
-        pageStore.openedLoad()
+        await pageStore.openedLoad()
         // 权限code
         userStore.setPermissionCode(permissionCode)
 
@@ -137,7 +137,11 @@ router.beforeEach(async (to) => {
       }
     }
   }catch(error){
-    console.log(error)
+    NProgress.done()
+    console.error('权限信息加载失败:', error)
+    if (to.name !== 'LoginView') {
+      return { name: 'LoginView' }
+    }
   }
 });
 

@@ -12,8 +12,8 @@ fix: 手动引入组件会导致ElMessage组件样式丢失,
 const router = useRouter();
 const loginFormRef = ref(null);
 const formData = reactive({
-  username: "admin",
-  password: "admin" 
+  username: "",
+  password: ""
 });
 
 const rules = reactive({

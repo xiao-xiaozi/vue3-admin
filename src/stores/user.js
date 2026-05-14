@@ -26,6 +26,8 @@ export const useUserStore = defineStore('user', () => {
   // 重置所有state属性
   function resetAllState(){
     hasPermissionInfo.value = false
+    permissionCode.value = []
+    Object.keys(userInfo).forEach(key => delete userInfo[key])
   }
 
   let permissionCode = ref([]) // 权限code
