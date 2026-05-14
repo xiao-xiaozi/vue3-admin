@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => {
         ], 
       }),
       Icons({ autoInstall: true }),
-      Inspect()
+      mode !== 'production' && Inspect()
     ],
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), }, },
     css: { preprocessorOptions: { scss: { additionalData: `@use "@/assets/style/variable.scss";`, }, }, },
