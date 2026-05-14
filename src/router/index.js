@@ -120,7 +120,7 @@ router.beforeEach(async (to) => {
         // 收集开启缓存的页面
         pageStore.findKeepAliveRoute(fullRoutes)
         // 从持久化数据中加载已打开的标签页信息
-        pageStore.openedLoad()
+        await pageStore.openedLoad()
         // 权限code
         userStore.setPermissionCode(permissionCode)
 
