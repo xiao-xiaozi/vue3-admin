@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest --environment jsdom",
+    "coverage": "vitest --coverage --run && node scripts/update-coverage-badges.js",
     "lint": "eslint . --fix",
     "lint:style": "stylelint \"src/**/*.(vue|scss|css)\" --fix",
     "mock:update": "easymock init ."
