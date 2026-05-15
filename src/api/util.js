@@ -1,11 +1,11 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import cookie from '@/utils/util.cookie.js';
 
 const instance = axios.create();
 
 // 请求拦截器 — 从 cookie 中取出 token 附加到 Authorization 头
 instance.interceptors.request.use((config) => {
-  const token = Cookies.get(`vue3-admin-${APP_VERSION}-token`)
+  const token = cookie.get('token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -27,7 +27,7 @@ instance.interceptors.response.use((response) => {
   return response.data
 }, (error) => {
   if (error.response && error.response.status === 401) {
-    Cookies.remove(`vue3-admin-${APP_VERSION}-token`)
+    cookie.remove('token')
     window.location.hash = '#/login'
   }
   return Promise.reject(error)
