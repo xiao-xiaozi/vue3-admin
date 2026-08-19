@@ -5,7 +5,12 @@ const summaryPath = resolve('coverage/coverage-summary.json')
 const readmePath = resolve('README.md')
 
 const summary = JSON.parse(readFileSync(summaryPath, 'utf-8'))
-const { statements, branches, functions, lines } = summary.total
+const {
+  statements,
+  branches,
+  functions,
+  lines
+} = summary.total
 
 const color = (pct) => {
   if (pct >= 80) return 'brightgreen'
@@ -23,9 +28,9 @@ const badges = [
 
 const readme = readFileSync(readmePath, 'utf-8')
 const updated = readme.replace(
-  /^\[!\[Statements\].*\n\[!\[Branches\].*\n\[!\[Functions\].*\n\[!\[Lines\].*/m,
+  /^!\[Statements\].*\r?\n!\[Branches\].*\r?\n!\[Functions\].*\r?\n!\[Lines\].*/m,
   badges
 )
 
-write(readmePath, updated)
+writeFileSync(readmePath, updated, 'utf-8')
 console.log(`Coverage badges updated: statements=${statements.pct}% branches=${branches.pct}% functions=${functions.pct}% lines=${lines.pct}%`)

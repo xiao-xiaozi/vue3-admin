@@ -1,9 +1,9 @@
 # vue3-admin
 
-![Statements](https://img.shields.io/badge/statements-27.9%25-orange)
-![Branches](https://img.shields.io/badge/branches-87.82%25-brightgreen)
-![Functions](https://img.shields.io/badge/functions-79.62%25-green)
-![Lines](https://img.shields.io/badge/lines-27.9%25-orange)
+![Statements](https://img.shields.io/badge/statements-34.54%25-orange)
+![Branches](https://img.shields.io/badge/branches-91.05%25-brightgreen)
+![Functions](https://img.shields.io/badge/functions-88.67%25-brightgreen)
+![Lines](https://img.shields.io/badge/lines-34.54%25-orange)
 
 This template should help get you started developing with Vue 3 in Vite.
 
