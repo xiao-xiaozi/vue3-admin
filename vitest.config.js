@@ -20,7 +20,7 @@ export default defineConfig({
       exclude: [
         'src/**/__tests__/**',
         'src/**/*.spec.js',
-        'src/mock/**',
+        'src/mocks/**',
         'src/main.js',
       ],
       reporter: ['text', 'json-summary', 'html'],

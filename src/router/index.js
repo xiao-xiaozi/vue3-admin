@@ -8,7 +8,6 @@ import { useUserStore } from "@/stores/user";
 import util from "@/utils";
 import NProgress from "nprogress";
 import 'nprogress/nprogress.css'
-import staticRoutes from "@/mock/menu.js"
 
 const Layout = () => import('@/Layout/LayoutIndex.vue')
 
@@ -100,7 +99,7 @@ router.beforeEach(async (to) => {
           }
         } = await api.userResourceGet()
         
-        const fullRoutes = [...permissionRoutes, ...staticRoutes,]
+        const fullRoutes = permissionRoutes
         
         let menus = cloneDeep(fullRoutes)
         handleMenus(menus)

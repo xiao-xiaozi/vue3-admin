@@ -9,8 +9,7 @@
     "test:unit": "vitest --environment jsdom",
     "coverage": "vitest --coverage --run && node scripts/update-coverage-badges.js",
     "lint": "eslint . --fix",
-    "lint:style": "stylelint \"src/**/*.(vue|scss|css)\" --fix",
-    "mock:update": "easymock init ."
+    "lint:style": "stylelint \"src/**/*.(vue|scss|css)\" --fix"
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^6.2.0",
@@ -38,6 +37,7 @@
     "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
     "jsdom": "^27.4.0",
+    "msw": "^2.15.0",
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "sass": "^1.99.0",
@@ -51,5 +51,10 @@
     "vite": "^6.1.1",
     "vite-plugin-inspect": "^10.2.1",
     "vitest": "^3.0.6"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

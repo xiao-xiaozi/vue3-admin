@@ -11,6 +11,7 @@ fix: 手动引入组件会导致ElMessage组件样式丢失,
 // import { ElMessage } from "element-plus";
 const router = useRouter();
 const loginFormRef = ref(null);
+const loginLoading = ref(false);
 const formData = reactive({
   username: "",
   password: ""
@@ -31,18 +32,22 @@ const rules = reactive({
 
 
 function loginClick() {
-  loginFormRef.value.validate((valid) => {
-    if (valid) {
-      api.loginPost().then(({ data }) => {
-        util.cookie.set('token', data.token)
-        ElMessage.success("登录成功！");
-      })
-      setTimeout(() => {
-        router.push("/index");
-      }, 300)
+  loginFormRef.value.validate(async (valid) => {
+    if (!valid) return
+
+    loginLoading.value = true
+    try {
+      const { data } = await api.loginPost({ data: { ...formData }})
+
+      util.cookie.set('token', data.token)
+      ElMessage.success("登录成功！");
+      await router.push("/index");
+    } catch {
+      ElMessage.error("登录失败，请检查用户名和密码");
+    } finally {
+      loginLoading.value = false
     }
   });
-
 }
 
 
@@ -75,7 +80,11 @@ function loginClick() {
               placeholder="请输入密码" />
           </el-form-item>
         </el-form>
-        <el-button type="primary" class="login-btn" @click="loginClick">
+        <el-button
+          type="primary"
+          class="login-btn"
+          :loading="loginLoading"
+          @click="loginClick">
           登录
         </el-button>
       </div>

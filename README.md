@@ -33,6 +33,17 @@ npm run dev
 npm run build
 ```
 
+### Mock API
+
+Development and the static demo use the MSW handlers in `src/mocks` by default. Any non-empty username and password can be used to sign in.
+
+To connect to a real backend, create `.env.local`:
+
+```ini
+VITE_API_MODE='real'
+VITE_API_BASE_URL='https://api.example.com'
+```
+
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
@@ -59,7 +70,7 @@ npm run lint
 - [x] 页面的缓存机制配置
 - [ ] 菜单icon因为按需引入缘故，通过component加载时无法正常显示。手动引入或其他方法？手动引入
 - [x] 维护当前打开的页面数据
-- [X] 接入easy-mock加载mock数据
+- [X] 使用MSW加载仓库内mock数据
 - [X] 页面切换动画
 - [X] 打开的标签页信息中首页不可删除，不显示删除按钮。
 - [X] 简易的登录页以及后台渲染基础框架
